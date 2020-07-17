@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+require_once __DIR__ .'/vendor/autoload.php';
+use Symfony\Component\Console\Application;
+use App\Commands\CostsToFileCommand;
+use App\Commands\GenerateSpreadsheetCommand;
+
+$app = new Application();
+$app->add(new CostsToFileCommand() );
+$app->add(new GenerateSpreadsheetCommand() );
+
+$app->run();
