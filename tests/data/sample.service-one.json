@@ -1,0 +1,215 @@
+{
+    "environment": "sandbox",
+    "project": "sandbox",
+    "startDate": "2020-01-01",
+    "endDate": "2020-07-01",
+    "data": [
+        {
+            "TimePeriod": {
+                "Start": "2020-01-01",
+                "End": "2020-02-01"
+            },
+            "Total": [],
+            "Groups": [                
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "1.6016216126",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$tag 1"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.232868401",
+                            "Unit": "USD"
+                        }
+                    }
+                }
+            ],
+            "Estimated": false
+        },
+        {
+            "TimePeriod": {
+                "Start": "2020-02-01",
+                "End": "2020-03-01"
+            },
+            "Total": [],
+            "Groups": [
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.632751977",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$tag 1"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.030921312",
+                            "Unit": "USD"
+                        }
+                    }
+                }
+                
+            ],
+            "Estimated": false
+        },
+        {
+            "TimePeriod": {
+                "Start": "2020-03-01",
+                "End": "2020-04-01"
+            },
+            "Total": [],
+            "Groups": [
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.891644621",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$tag 1"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.24303648",
+                            "Unit": "USD"
+                        }
+                    }
+                }
+                
+            ],
+            "Estimated": false
+        },
+        {
+            "TimePeriod": {
+                "Start": "2020-04-01",
+                "End": "2020-05-01"
+            },
+            "Total": [],
+            "Groups": [
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.7659612064",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$tag 1"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.13830072",
+                            "Unit": "USD"
+                        }
+                    }
+                }                
+            ],
+            "Estimated": false
+        },
+        {
+            "TimePeriod": {
+                "Start": "2020-05-01",
+                "End": "2020-06-01"
+            },
+            "Total": [],
+            "Groups": [
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.897178464",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$tag 1"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.247647048",
+                            "Unit": "USD"
+                        }
+                    }
+                }
+            ],
+            "Estimated": false
+        },
+        {
+            "TimePeriod": {
+                "Start": "2020-06-01",
+                "End": "2020-07-01"
+            },
+            "Total": [],
+            "Groups": [
+                
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.7616332842",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$tag 1"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.13469316",
+                            "Unit": "USD"
+                        }
+                    }
+                }
+            ],
+            "Estimated": false
+        }
+    ]
+}
