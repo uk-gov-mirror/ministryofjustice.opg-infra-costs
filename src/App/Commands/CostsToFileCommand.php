@@ -16,7 +16,7 @@ class CostsToFileCommand extends Command
     protected string $mfaToken = "";
     protected static string $identityAccountId = "631181914621";
     protected $arns = [
-        //'sandbox-sandbox-breakglass'        => "arn:aws:iam::995199299616:role/breakglass",
+        'sandbox-sandbox-breakglass'        => "arn:aws:iam::995199299616:role/breakglass",
         // sirius
         'sirius-dev-breakglass'             => "arn:aws:iam::288342028542:role/breakglass",
         'sirius-preprod-breakglass'         => "arn:aws:iam::492687888235:role/breakglass",
@@ -48,9 +48,9 @@ class CostsToFileCommand extends Command
         'jenkins-dev-accountwrite'          => "arn:aws:iam::679638075911:role/account-write",
         'jenkins-prod-accountwrite'         => "arn:aws:iam::997462338508:role/account-write",
         // LEGACY
-        'lpa-LEGACY_prod-accountwrite'      => "arn:aws:iam::550790013665:role/account-write",
         'refunds-LEGACY_dev-accountwrite'   => "arn:aws:iam::792093328875:role/account-write",
-        'refunds-LEGACY_prod-accountwrite'  => "arn:aws:iam::574983609246:role/account-write"
+        'refunds-LEGACY_prod-accountwrite'  => "arn:aws:iam::574983609246:role/account-write",
+        #'lpa-LEGACY_prod-accountwrite'      => "arn:aws:iam::550790013665:role/account-write",
     ];
 
     protected function configure()
