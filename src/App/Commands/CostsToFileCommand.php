@@ -17,6 +17,7 @@ class CostsToFileCommand extends Command
     protected static string $identityAccountId = "631181914621";
     protected $arns = [
         'sandbox-sandbox-breakglass'        => "arn:aws:iam::995199299616:role/breakglass",
+        'identity-identity-breakglass'      => "arn:aws:iam::631181914621:role/breakglass",
         // sirius
         'sirius-dev-breakglass'             => "arn:aws:iam::288342028542:role/breakglass",
         'sirius-preprod-breakglass'         => "arn:aws:iam::492687888235:role/breakglass",
