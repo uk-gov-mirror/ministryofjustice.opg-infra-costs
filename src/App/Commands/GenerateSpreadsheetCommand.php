@@ -14,10 +14,7 @@ use PhpOffice\PhpSpreadsheet\Chart\DataSeries;
 
 class GenerateSpreadsheetCommand extends Command
 {
-    protected $project = "";
-    protected $environment = "";
-    protected $role = "";
-
+    
     protected function configure()
     {
         $this->setName("spreadsheet")

@@ -15,14 +15,11 @@ class Costs
     public static function blendedGroupedByServiceAndTag(
         string $start, 
         string $end, 
+        CostExplorerClient $client,
         string $granularity = 'MONTHLY'
         ) 
     {
-        $client = new CostExplorerClient([
-            'region'        => 'eu-west-1', 
-            'version'       => '2017-10-25',
-            'credentials'   => CredentialProvider::env()
-        ]);
+        
         $result = $client->getCostAndUsage(
             [
                 'Metrics' => [
