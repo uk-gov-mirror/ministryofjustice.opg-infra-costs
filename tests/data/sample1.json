@@ -1,0 +1,1042 @@
+{
+    "project": "testProject1",
+    "environment": "env1",
+    "startDate": "2020-01-01",
+    "endDate": "2020-07-01",
+    "data": [
+        {
+            "TimePeriod": {
+                "Start": "2020-01-01",
+                "End": "2020-02-01"
+            },
+            "Total": [],
+            "Groups": [
+                {
+                    "Keys": [
+                        "Service Two",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.009089",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Three",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0001107299",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Four",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0000618391",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Five",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0000071379",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "1.6016216126",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$tag 1"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.232868401",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Six",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "41.1919467072",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service 7",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0000037711",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 8",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0252000221",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 9",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.000001558",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 10",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0540578189",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 11",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.2600921811",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Tax",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "9.25",
+                            "Unit": "USD"
+                        }
+                    }
+                }
+            ],
+            "Estimated": false
+        },
+        {
+            "TimePeriod": {
+                "Start": "2020-02-01",
+                "End": "2020-03-01"
+            },
+            "Total": [],
+            "Groups": [
+                {
+                    "Keys": [
+                        "Service Two",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.027791",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Three",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.000549792",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 12",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.2255632145",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.632751977",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$tag 1"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.030921312",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 13",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.289020167",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 13",
+                        "application$tag 2"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0587188326",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Six",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "42.5376521478",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service 7",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0000044226",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 8",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.2772249076",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 8",
+                        "application$tag 2"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0504013226",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 14",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "2.1522845936",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 9",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.000010485",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 15",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0000152",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 10",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.5387425466",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 11",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.4003821096",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 11",
+                        "application$tag 2"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0001179123",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Tax",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "10.63",
+                            "Unit": "USD"
+                        }
+                    }
+                }
+            ],
+            "Estimated": false
+        },
+        {
+            "TimePeriod": {
+                "Start": "2020-04-01",
+                "End": "2020-05-01"
+            },
+            "Total": [],
+            "Groups": [
+                {
+                    "Keys": [
+                        "Service Two",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.031247",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 19",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "1.4775766899",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Three",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.001425",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Four",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0003760394",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 12",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "1.1904800241",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.7659612064",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$tag 1"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.13830072",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Six",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "39.9199487749",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service 7",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0000035311",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 9",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0004373347",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 15",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0001192",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 10",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "1.722506446",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 11",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.4010001711",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Tax",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "10.3",
+                            "Unit": "USD"
+                        }
+                    }
+                }
+            ],
+            "Estimated": false
+        },
+        {
+            "TimePeriod": {
+                "Start": "2020-05-01",
+                "End": "2020-06-01"
+            },
+            "Total": [],
+            "Groups": [
+                {
+                    "Keys": [
+                        "Service Two",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.039066",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 19",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "1.0931364224",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Three",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0011240705",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Four",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.000023053",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Four",
+                        "application$tag 3"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0003240967",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 12",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.4011799936",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.897178464",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$tag 1"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.247647048",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 18",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0031699095",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 13",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "2.3071032727",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Six",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "50.839940566",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service 7",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0000159429",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 16",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0024112",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 9",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0003163385",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 15",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0000432",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 10",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "1.902201705",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 11",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.4013784236",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 11",
+                        "application$tag 3"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.000065763",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 11",
+                        "application$tag 4"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0000050708",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 11",
+                        "application$tag 5"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0000002385",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 11",
+                        "application$tag 6"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0000001082",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Tax",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "12.83",
+                            "Unit": "USD"
+                        }
+                    }
+                }
+            ],
+            "Estimated": false
+        },
+        {
+            "TimePeriod": {
+                "Start": "2020-06-01",
+                "End": "2020-07-01"
+            },
+            "Total": [],
+            "Groups": [
+                {
+                    "Keys": [
+                        "Service Two",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.034121",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 17",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0000044513",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Three",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.000012",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 12",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.400010032",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.7616332842",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ServiceOnce",
+                        "application$tag 1"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "3.13469316",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 18",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.00602604",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service Six",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "39.9199245414",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Service 7",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0000041018",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 16",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.0254012",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 10",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "2.1964725808",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 11",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.4011626469",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 11",
+                        "application$tag 5"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.000000009",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "service 11",
+                        "application$tag 6"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "0.000000006",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Tax",
+                        "application$"
+                    ],
+                    "Metrics": {
+                        "BlendedCost": {
+                            "Amount": "9.98",
+                            "Unit": "USD"
+                        }
+                    }
+                }
+            ],
+            "Estimated": false
+        }
+    ]
+}

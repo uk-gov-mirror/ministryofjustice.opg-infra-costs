@@ -1,0 +1,16 @@
+{
+    "require": {
+        "symfony/console": "^5.1",
+        "aws/aws-sdk-php": "^3.145",
+        "phpoffice/phpspreadsheet": "^1.14"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "bin": ["aws-costs"],
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    }
+}
