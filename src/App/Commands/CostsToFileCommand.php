@@ -43,7 +43,7 @@ class CostsToFileCommand extends Command
         'ual-preprod-breakglass'            => "arn:aws:iam::888228022356:role/breakglass",
         'ual-prod-breakglass'               => "arn:aws:iam::690083044361:role/breakglass",
         // org
-        'org-mangagement-breakglass'        => "arn:aws:iam::311462405659:role/breakglass",
+        'org-management-breakglass'         => "arn:aws:iam::311462405659:role/breakglass",
         // old roles, but actively used 
         'jenkins-dev-accountwrite'          => "arn:aws:iam::679638075911:role/account-write",
         'jenkins-prod-accountwrite'         => "arn:aws:iam::997462338508:role/account-write",
@@ -93,30 +93,15 @@ class CostsToFileCommand extends Command
         $end = $input->getOption("endDate");
         
         $identityAccount = $input->getOption("awsIdentityAccountId");
-        // get username & mfa token
-        $helper = $this->getHelper('question');        
-
-        $existing = is_file("./awsusername") ? file_get_contents("./awsusername") : "";
-        $questionString = sprintf('Please enter your AWS username [%s]:', $existing);
-        $askUsername = new Question($questionString, $existing);
-        $indentityUser = $helper->ask($input, $output, $askUsername);
-        file_put_contents("./awsusername", $indentityUser);       
         
-        $askMfa = new Question('Your current AWS MFA token: ');
-        $counter = 0;
+        $counter = 1;
         $max = count($this->arns);
         foreach($this->arns as $name => $arn){
             list($project, $environment, $role) = explode("-", $name);
             $output->writeln("<info>Getting data [${counter}/${max}] for ${name}</info>");
-            // have to ask mfa each time
-            $mfaToken = $helper->ask($input, $output, $askMfa);
+            
             // assumed role
-            $client = AssumedRoleClient::get(
-                    $identityAccount,
-                    $indentityUser,
-                    $mfaToken,
-                    $arn
-            );
+            $client = AssumedRoleClient::get($arn);
 
             $data = Costs::blendedGroupedByServiceAndTag($start, $end, $client);
             $page = [

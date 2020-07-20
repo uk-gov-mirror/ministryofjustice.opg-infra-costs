@@ -11,10 +11,7 @@ class AssumedRoleClient
      * Fetches a client using mfa for the arn
      *
      */
-    public static function get(
-        string $identityAccount,
-        string $identityUser,
-        string $mfaToken,
+    public static function get(       
         string $arn
         ) : CostExplorerClient
     {
@@ -23,31 +20,24 @@ class AssumedRoleClient
             'version' => 'latest'
         ]);
 
-        
-        $result = $stsClient->AssumeRole([
+         // assume the role
+         $role = $stsClient->AssumeRole([
             'RoleArn' => $arn,
             'RoleSessionName' => "get-costs-cli",
-            'SerialNumber' => "arn:aws:iam::${identityAccount}:mfa/${identityUser}",
-            'TokenCode' => $mfaToken
+            'DurationSeconds' => 900
         ]);
-        
-        
+        // create the client
         return new CostExplorerClient([
             'region'        => 'eu-west-1', 
             'version'       => 'latest',
             'credentials' =>  [
-                'key'    => $result['Credentials']['AccessKeyId'],
-                'secret' => $result['Credentials']['SecretAccessKey'],
-                'token'  => $result['Credentials']['SessionToken']
+                'key'    => $role['Credentials']['AccessKeyId'],
+                'secret' => $role['Credentials']['SecretAccessKey'],
+                'token'  => $role['Credentials']['SessionToken']
             ]
         ]);
         
+        
     }
-
-
-
-    
-    
-
     
 }
