@@ -103,13 +103,12 @@ class CostsToFileCommand extends Command
         file_put_contents("./awsusername", $indentityUser);       
         
         $askMfa = new Question('Your current AWS MFA token: ');
-        $mfaToken = $helper->ask($input, $output, $askMfa);
 
         foreach($this->arns as $name => $arn){
             list($project, $environment, $role) = explode("-", $name);
             $output->writeln("<info>Getting data for ${name}</info>");
-            
-            
+            // have to ask mfa each time
+            $mfaToken = $helper->ask($input, $output, $askMfa);
             // assumed role
             $client = AssumedRoleClient::get(
                     $identityAccount,

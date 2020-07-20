@@ -6,7 +6,6 @@ use Aws\Sts\StsClient;
 
 class AssumedRoleClient
 {
-    protected static $result = null;
     
     /**
      * Fetches a client using mfa for the arn
@@ -24,23 +23,22 @@ class AssumedRoleClient
             'version' => 'latest'
         ]);
 
-        if(self::$result == null)
-        {
-            self::$result = $stsClient->AssumeRole([
-                'RoleArn' => $arn,
-                'RoleSessionName' => "get-costs-cli",
-                'SerialNumber' => "arn:aws:iam::${identityAccount}:mfa/${identityUser}",
-                'TokenCode' => $mfaToken
-            ]);
-        }
+        
+        $result = $stsClient->AssumeRole([
+            'RoleArn' => $arn,
+            'RoleSessionName' => "get-costs-cli",
+            'SerialNumber' => "arn:aws:iam::${identityAccount}:mfa/${identityUser}",
+            'TokenCode' => $mfaToken
+        ]);
+        
         
         return new CostExplorerClient([
             'region'        => 'eu-west-1', 
             'version'       => 'latest',
             'credentials' =>  [
-                'key'    => self::$result['Credentials']['AccessKeyId'],
-                'secret' => self::$result['Credentials']['SecretAccessKey'],
-                'token'  => self::$result['Credentials']['SessionToken']
+                'key'    => $result['Credentials']['AccessKeyId'],
+                'secret' => $result['Credentials']['SecretAccessKey'],
+                'token'  => $result['Credentials']['SessionToken']
             ]
         ]);
         
