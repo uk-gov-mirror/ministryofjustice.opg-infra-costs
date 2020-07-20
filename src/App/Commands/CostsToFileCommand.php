@@ -50,7 +50,7 @@ class CostsToFileCommand extends Command
         // LEGACY
         'refunds-LEGACY_dev-accountwrite'   => "arn:aws:iam::792093328875:role/account-write",
         'refunds-LEGACY_prod-accountwrite'  => "arn:aws:iam::574983609246:role/account-write",
-        #'lpa-LEGACY_prod-accountwrite'      => "arn:aws:iam::550790013665:role/account-write",
+        'lpa-LEGACY_prod-breakglass'      => "arn:aws:iam::550790013665:role/breakglass",
     ];
 
     protected function configure()
@@ -103,10 +103,11 @@ class CostsToFileCommand extends Command
         file_put_contents("./awsusername", $indentityUser);       
         
         $askMfa = new Question('Your current AWS MFA token: ');
-
+        $counter = 0;
+        $max = count($this->arns);
         foreach($this->arns as $name => $arn){
             list($project, $environment, $role) = explode("-", $name);
-            $output->writeln("<info>Getting data for ${name}</info>");
+            $output->writeln("<info>Getting data [${counter}/${max}] for ${name}</info>");
             // have to ask mfa each time
             $mfaToken = $helper->ask($input, $output, $askMfa);
             // assumed role
@@ -129,6 +130,7 @@ class CostsToFileCommand extends Command
             $dir = dirname($file);
             if(!is_dir($dir)) mkdir($dir, 0777, true);
             file_put_contents($file, json_encode($page));
+            $counter ++ ;
         }
         return Command::SUCCESS;
         
