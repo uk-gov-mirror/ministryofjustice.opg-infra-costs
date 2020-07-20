@@ -50,7 +50,7 @@ class CostsToFileCommand extends Command
         // LEGACY
         'refunds-LEGACY_dev-accountwrite'   => "arn:aws:iam::792093328875:role/account-write",
         'refunds-LEGACY_prod-accountwrite'  => "arn:aws:iam::574983609246:role/account-write",
-        'lpa-LEGACY_prod-breakglass'      => "arn:aws:iam::550790013665:role/breakglass",
+        'lpa-LEGACY_prod-breakglass'        => "arn:aws:iam::550790013665:role/breakglass",
     ];
 
     protected function configure()
