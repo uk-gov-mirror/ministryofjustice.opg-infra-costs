@@ -23,7 +23,7 @@ class CostsToFileCommand extends Command
         'sirius-preprod-breakglass'         => "arn:aws:iam::492687888235:role/breakglass",
         'sirius-prod-breakglass'            => "arn:aws:iam::649098267436:role/breakglass",
         'sirius-backup-breakglass'          => "arn:aws:iam::132068124730:role/breakglass",
-        // servce
+        // serve
         'serve-dev-breakglass'              => "arn:aws:iam::705467933182:role/breakglass",
         'serve-preprod-breakglass'          => "arn:aws:iam::540070264006:role/breakglass",
         'serve-prod-breakglass'             => "arn:aws:iam::933639921819:role/breakglass",
