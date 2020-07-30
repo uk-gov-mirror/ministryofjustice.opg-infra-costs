@@ -6,16 +6,16 @@ use Aws\Sts\StsClient;
 
 class AssumedRoleClient
 {
-    
+
     /**
      * Fetches a client using mfa for the arn
      *
      */
-    public static function get(       
+    public static function get(
         string $arn
         ) : CostExplorerClient
     {
-        $stsClient = new StsClient([        
+        $stsClient = new StsClient([
             'region' => 'eu-west-1',
             'version' => 'latest'
         ]);
@@ -28,7 +28,7 @@ class AssumedRoleClient
         ]);
         // create the client
         return new CostExplorerClient([
-            'region'        => 'eu-west-1', 
+            'region'        => 'eu-west-1',
             'version'       => 'latest',
             'credentials' =>  [
                 'key'    => $role['Credentials']['AccessKeyId'],
@@ -36,8 +36,8 @@ class AssumedRoleClient
                 'token'  => $role['Credentials']['SessionToken']
             ]
         ]);
-        
-        
+
+
     }
-    
+
 }

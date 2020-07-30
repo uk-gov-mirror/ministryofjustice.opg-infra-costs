@@ -7,9 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use App\Helpers\Identity;
 use App\Helpers\Costs;
-use Symfony\Component\Console\Question\Question;
 
 class CostsToFileCommand extends Command
 {
