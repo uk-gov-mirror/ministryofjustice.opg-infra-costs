@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"opg-infra-costs/commands"
+	"opg-infra-costs/commands/detail"
 	"os"
 )
 
@@ -11,11 +11,11 @@ import (
 
 func main() {
 
-	detailCmd, _ := commands.DetailCommand()
+	detailCmd, _ := detail.Command()
 
 	switch os.Args[1] {
 	case detailCmd.Name:
-		commands.RunDetailCommand(detailCmd)
+		detail.Run(detailCmd)
 	default:
 		fmt.Printf("Command details listed below.\n\n [%s]:\n", detailCmd.Name)
 		detailCmd.Set.PrintDefaults()

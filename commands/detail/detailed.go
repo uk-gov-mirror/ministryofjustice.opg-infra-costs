@@ -1,9 +1,10 @@
-package commands
+package detail
 
 import (
 	"flag"
 	"fmt"
 	"opg-infra-costs/accounts"
+	"opg-infra-costs/commands"
 	"opg-infra-costs/costs"
 	"opg-infra-costs/dates"
 	"opg-infra-costs/tabular"
@@ -12,8 +13,9 @@ import (
 	"time"
 )
 
-func DetailCommand() (Command, error) {
-	cmd := Command{Name: "detail"}
+// DetailCommand set up the input and name
+func Command() (commands.Command, error) {
+	cmd := commands.Command{Name: "detail"}
 	set := flag.NewFlagSet(cmd.Name, flag.ExitOnError)
 	dateFormat := dates.DateFormat()
 	now := dates.StartOfDay(time.Now())
@@ -29,8 +31,8 @@ func DetailCommand() (Command, error) {
 }
 
 // parse the Command input args
-func parseDetailCommand(
-	cmd Command) (
+func parseCommand(
+	cmd commands.Command) (
 	start time.Time,
 	end time.Time,
 	period string,
@@ -61,22 +63,22 @@ func parseDetailCommand(
 
 }
 
-func RunDetailCommand(cmd Command) {
-
+// run the command
+func Run(cmd commands.Command) error {
+	// parse the args, skipping the 'detail' namespace
 	cmd.Set.Parse(os.Args[2:])
 
-	startDate, endDate, period, sendToApi, err := parseDetailCommand(cmd)
+	startDate, endDate, period, sendToApi, err := parseCommand(cmd)
 	if err != nil {
-		fmt.Printf("[%s] Error: %v\n", cmd.Name, err)
+		return err
 	}
 
 	fmt.Printf("[%s] Arguments:\n start: %v\n end: %v\n period: %v\n sendToApi: %v\n", cmd.Name, startDate, endDate, period, sendToApi)
 
 	allAccounts := accounts.List()
 	var costData []costs.CostRow
-	// add concurrency here
+	// concurrency on the api calls to aws
 	var wg sync.WaitGroup
-	//out := color.New(color.FgGreen, color.Underline).SprintfFunc()
 
 	for _, a := range allAccounts {
 		wg.Add(1)
@@ -98,5 +100,7 @@ func RunDetailCommand(cmd Command) {
 	if !sendToApi {
 		tabular.Table(costData)
 	}
+
+	return nil
 
 }
