@@ -8,6 +8,7 @@ import (
 	"opg-infra-costs/dates"
 	"opg-infra-costs/tabular"
 	"os"
+	"sync"
 	"time"
 )
 
@@ -71,13 +72,27 @@ func RunDetailCommand(cmd Command) {
 
 	fmt.Printf("[%s] Arguments:\n start: %v\n end: %v\n period: %v\n sendToApi: %v\n", cmd.Name, startDate, endDate, period, sendToApi)
 
-	accounts := accounts.List()
+	allAccounts := accounts.List()
 	var costData []costs.CostRow
 	// add concurrency here
-	for _, a := range accounts {
-		data, _ := costs.Blended(a, startDate, endDate, period)
-		costData = append(costData, data...)
+	var wg sync.WaitGroup
+	//out := color.New(color.FgGreen, color.Underline).SprintfFunc()
+
+	for _, a := range allAccounts {
+		wg.Add(1)
+		go func(
+			a accounts.Account,
+			s time.Time,
+			e time.Time,
+			p string) {
+
+			fmt.Printf("[%s] Fetching costs for account [%s] with environment [%s] between [%s] - [%s]\n", cmd.Name, a.Name, a.Environment, s.String(), e.String())
+			data, _ := costs.Blended(a, s, e, p)
+			costData = append(costData, data...)
+			wg.Done()
+		}(a, startDate, endDate, period)
 	}
+	wg.Wait()
 
 	// render as a table
 	if !sendToApi {
