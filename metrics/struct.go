@@ -4,6 +4,7 @@ import (
 	"opg-infra-costs/costs"
 	"opg-infra-costs/dates"
 	"strconv"
+	"strings"
 	"time"
 
 	"encoding/json"
@@ -22,14 +23,15 @@ type MetricsData struct {
 
 func (md *MetricsData) FromCostRow(cr costs.CostRow) {
 	md.Dimensions = "dimensions"
-	md.Project = "COSTTESTING" //cr.Account.Name
+	md.Project = "CM4" //cr.Account.Name
 	//md.Service = cr.Service
 	md.Environment = cr.Account.Environment
 	md.MeasureName = "cost"
 	md.MeasureValue = cr.Cost
 	md.MeasureValueType = "DOUBLE"
-	time, _ := time.Parse(dates.AWSDateFormat(), cr.Date)
-	md.Time = strconv.FormatInt(time.Unix(), 10)
+	mytime, _ := time.Parse(dates.AWSDateFormat(), cr.Date)
+	t := mytime.UnixNano() / int64(time.Millisecond)
+	md.Time = strconv.FormatInt(t, 10)
 }
 
 type MetricsRecord struct {
@@ -41,21 +43,21 @@ type MetricsPutData struct {
 	Records []MetricsRecord `json:"records"`
 }
 
-func FromCosts(costs []costs.CostRow) MetricsPutData {
+func FromCosts(costs []costs.CostRow) ([]byte, error) {
 	mpd := MetricsPutData{}
 
 	for _, c := range costs {
 		record := MetricsRecord{}
-		record.Partition = "some-key"
+		record.Partition = "some key"
 		data := MetricsData{}
 		data.FromCostRow(c)
 		j, _ := json.Marshal(data)
-		record.Data = string(j)
+		d := string(j)
+		record.Data = strings.ReplaceAll(d, `"`, `'`)
 		mpd.Records = append(mpd.Records, record)
 
 	}
 
 	mpd.Records = mpd.Records[0:1]
-
-	return mpd
+	return json.Marshal(mpd)
 }
