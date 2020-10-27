@@ -13,7 +13,7 @@ const ApiEndpoint = "https://lz0rqicsng.execute-api.eu-west-1.amazonaws.com/prod
 // SendToApi formats a put request to send to the api
 func SendToApi(costs []costs.CostRow) {
 	// convert from cost struct to json
-	jsonData, _ := FromCosts(costs)
+	jsonData, _ := FromCosts(costs, 5)
 
 	client := &http.Client{}
 	// set the HTTP method, url, and request body

@@ -43,7 +43,7 @@ type MetricsPutData struct {
 	Records []MetricsRecord `json:"records"`
 }
 
-func FromCosts(costs []costs.CostRow) ([]byte, error) {
+func FromCosts(costs []costs.CostRow, limit int) ([]byte, error) {
 	mpd := MetricsPutData{}
 
 	for _, c := range costs {
@@ -58,6 +58,8 @@ func FromCosts(costs []costs.CostRow) ([]byte, error) {
 
 	}
 
-	mpd.Records = mpd.Records[0:1]
+	if limit != -1 {
+		mpd.Records = mpd.Records[0:limit]
+	}
 	return json.Marshal(mpd)
 }
