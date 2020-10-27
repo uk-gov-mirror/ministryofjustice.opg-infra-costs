@@ -7,6 +7,7 @@ import (
 	"opg-infra-costs/commands"
 	"opg-infra-costs/costs"
 	"opg-infra-costs/dates"
+	"opg-infra-costs/metrics"
 	"opg-infra-costs/tabular"
 	"os"
 	"sync"
@@ -88,7 +89,7 @@ func Run(cmd commands.Command) error {
 			e time.Time,
 			p string) {
 
-			fmt.Printf("[%s] Fetching costs for account [%s] with environment [%s] between [%s] - [%s]\n", cmd.Name, a.Name, a.Environment, s.String(), e.String())
+			//fmt.Printf("[%s] Fetching costs for account [%s] with environment [%s] between [%s] - [%s]\n", cmd.Name, a.Name, a.Environment, s.String(), e.String())
 			data, _ := costs.Blended(a, s, e, p)
 			costData = append(costData, data...)
 			wg.Done()
@@ -97,7 +98,9 @@ func Run(cmd commands.Command) error {
 	wg.Wait()
 
 	// render as a table
-	if !sendToApi {
+	if sendToApi {
+		metrics.SendToApi(costData)
+	} else {
 		tabular.Table(costData)
 	}
 
