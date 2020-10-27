@@ -74,13 +74,11 @@ func parseCommand(
 func Run(cmd commands.Command) error {
 	// parse the args, skipping the 'detail' namespace
 	cmd.Set.Parse(os.Args[2:])
-
+	// get all the command arguments
 	startDate, endDate, period, sendToApi, account, env, service, err := parseCommand(cmd)
 	if err != nil {
 		return err
 	}
-
-	fmt.Printf("[%s] Arguments:\n start: %v\n end: %v\n period: %v\n sendToApi: %v\n", cmd.Name, startDate, endDate, period, sendToApi)
 
 	allAccounts := accounts.Filtered(account, env)
 	var costData []costs.CostRow
