@@ -27,7 +27,8 @@ func Blended(
 
 	}
 	var resultsCosts []CostRow
-
+	// read and parse the response from AWS and convert
+	// to api - lots of levels
 	for _, results := range resp.ResultsByTime {
 		startDate := *results.TimePeriod.Start
 		for _, groups := range results.Groups {

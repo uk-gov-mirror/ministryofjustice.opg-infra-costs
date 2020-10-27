@@ -22,19 +22,20 @@ func Command() (commands.Command, error) {
 	commands.ArgumentStandardDateRestrictions(set)
 	commands.ArgumentStandardFilters(set)
 	set.String("granularity", "DAILY", "Grouping for the cost data to be either DAILY or MONTHLY")
-	set.Bool("send-to-metrics-api", false, "Send the cost data to Metrics API instead of table format")
+	set.String("output-as", "TABLE", "Output the cost data as one of the following {TABLE|CSV|API}")
 
 	cmd.Set = set
 	return cmd, nil
 }
 
-// parse the Command input args
+// parseCommand uses the flag set in Command to handle and parse
+// the arguments
 func parseCommand(
 	cmd commands.Command) (
 	start time.Time,
 	end time.Time,
 	period string,
-	send bool,
+	outputAs string,
 	accountName string,
 	environment string,
 	service string,
@@ -45,23 +46,19 @@ func parseCommand(
 
 	startStr := cmdSet.Lookup("start-date").Value.String()
 	endStr := cmdSet.Lookup("end-date").Value.String()
-	period = cmdSet.Lookup("granularity").Value.String()
+	start, err = time.Parse(dateFormat, startStr)
+	end, err = time.Parse(dateFormat, endStr)
 
 	accountName = cmdSet.Lookup("account").Value.String()
 	environment = cmdSet.Lookup("environment").Value.String()
 	service = cmdSet.Lookup("service").Value.String()
 
-	present := cmdSet.Lookup("send-to-metrics-api").Value.String()
-
-	if present == "true" {
-		send = true
-	} else {
-		send = false
+	outputAs = cmdSet.Lookup("output-as").Value.String()
+	if outputAs != "TABLE" && outputAs != "API" && outputAs != "CSV" {
+		err = fmt.Errorf("Output as is invalid [%v]", outputAs)
 	}
 
-	start, err = time.Parse(dateFormat, startStr)
-	end, err = time.Parse(dateFormat, endStr)
-
+	period = cmdSet.Lookup("granularity").Value.String()
 	if period != "DAILY" && period != "MONTHLY" {
 		err = fmt.Errorf("Granularity is invalid [%v]", period)
 	}
@@ -70,12 +67,12 @@ func parseCommand(
 
 }
 
-// run the command
+// Run the command
 func Run(cmd commands.Command) error {
 	// parse the args, skipping the 'detail' namespace
 	cmd.Set.Parse(os.Args[2:])
 	// get all the command arguments
-	startDate, endDate, period, sendToApi, account, env, service, err := parseCommand(cmd)
+	startDate, endDate, period, outputAs, account, env, service, err := parseCommand(cmd)
 	if err != nil {
 		return err
 	}
@@ -101,10 +98,11 @@ func Run(cmd commands.Command) error {
 	}
 	wg.Wait()
 
-	// render as a table
-	if sendToApi {
+	// how do we output this - table is default
+	switch outputAs {
+	case "API":
 		metrics.SendToApi(costData)
-	} else {
+	default:
 		tabular.Table(costData)
 	}
 
