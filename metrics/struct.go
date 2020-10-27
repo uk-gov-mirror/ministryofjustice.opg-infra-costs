@@ -11,10 +11,10 @@ import (
 )
 
 type MetricsData struct {
-	Dimensions  string `json:"Dimensions"`
-	Project     string `json:"Project"`
-	Environment string `json:"Environment"`
-	//Service          string `json:"Service"`
+	Dimensions       string `json:"Dimensions"`
+	Project          string `json:"Project"`
+	Environment      string `json:"Environment"`
+	Service          string `json:"Service"`
 	MeasureName      string `json:"MeasureName"`
 	MeasureValue     string `json:"MeasureValue"`
 	MeasureValueType string `json:"MeasureValueType"`
@@ -23,8 +23,8 @@ type MetricsData struct {
 
 func (md *MetricsData) FromCostRow(cr costs.CostRow) {
 	md.Dimensions = "dimensions"
-	md.Project = "CM4" //cr.Account.Name
-	//md.Service = cr.Service
+	md.Project = cr.Account.Name
+	md.Service = cr.Service
 	md.Environment = cr.Account.Environment
 	md.MeasureName = "cost"
 	md.MeasureValue = cr.Cost
