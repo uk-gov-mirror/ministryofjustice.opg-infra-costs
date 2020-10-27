@@ -7,7 +7,7 @@ import (
 	"github.com/rodaine/table"
 )
 
-func Table(costs []costs.CostRow) {
+func Table(costs costs.CostData) {
 
 	headerFmt := color.New(color.FgGreen, color.Underline).SprintfFunc()
 	columnFmt := color.New(color.FgYellow).SprintfFunc()
@@ -15,7 +15,7 @@ func Table(costs []costs.CostRow) {
 	tbl := table.New("Account", "Project", "Environment", "Service", "Date", "Cost")
 	tbl.WithHeaderFormatter(headerFmt).WithFirstColumnFormatter(columnFmt)
 
-	for _, row := range costs {
+	for _, row := range costs.Entries {
 		tbl.AddRow(
 			row.Account.Id,
 			row.Account.Name,

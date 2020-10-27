@@ -22,7 +22,7 @@ func Command() (commands.Command, error) {
 	commands.ArgumentStandardDateRestrictions(set)
 	commands.ArgumentStandardFilters(set)
 	set.String("granularity", "DAILY", "Grouping for the cost data to be either DAILY or MONTHLY")
-	set.String("output-as", "TABLE", "Output the cost data as one of the following {TABLE|CSV|API}")
+	set.String("output-as", "TABLE", "Output the cost data as one of the following {TABLE|API|XLSX}")
 
 	cmd.Set = set
 	return cmd, nil
@@ -54,7 +54,7 @@ func parseCommand(
 	service = cmdSet.Lookup("service").Value.String()
 
 	outputAs = cmdSet.Lookup("output-as").Value.String()
-	if outputAs != "TABLE" && outputAs != "API" && outputAs != "CSV" {
+	if outputAs != "TABLE" && outputAs != "API" && outputAs != "XLSX" {
 		err = fmt.Errorf("Output as is invalid [%v]", outputAs)
 	}
 
@@ -78,7 +78,7 @@ func Run(cmd commands.Command) error {
 	}
 
 	allAccounts := accounts.Filtered(account, env)
-	var costData []costs.CostRow
+	var costData costs.CostData
 	// concurrency on the api calls to aws
 	var wg sync.WaitGroup
 
@@ -92,7 +92,7 @@ func Run(cmd commands.Command) error {
 			service string) {
 
 			data, _ := costs.Blended(account, start, end, period, service)
-			costData = append(costData, data...)
+			costData.Entries = append(costData.Entries, data...)
 			wg.Done()
 		}(a, startDate, endDate, period, service)
 	}

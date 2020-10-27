@@ -8,3 +8,7 @@ type CostRow struct {
 	Cost    string
 	Account accounts.Account
 }
+
+type CostData struct {
+	Entries []CostRow
+}

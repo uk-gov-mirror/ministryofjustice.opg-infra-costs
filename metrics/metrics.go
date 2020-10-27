@@ -11,7 +11,7 @@ import (
 const ApiEndpoint = "https://lz0rqicsng.execute-api.eu-west-1.amazonaws.com/prod/streams/TimestreamMetricsStream/records"
 
 // SendToApi formats a put request to send to the api
-func SendToApi(costs []costs.CostRow) {
+func SendToApi(costs costs.CostData) {
 	// convert from cost struct to json
 	jsonData, _ := FromCosts(costs, 5)
 

@@ -43,10 +43,10 @@ type MetricsPutData struct {
 	Records []MetricsRecord `json:"records"`
 }
 
-func FromCosts(costs []costs.CostRow, limit int) ([]byte, error) {
+func FromCosts(costs costs.CostData, limit int) ([]byte, error) {
 	mpd := MetricsPutData{}
 
-	for _, c := range costs {
+	for _, c := range costs.Entries {
 		record := MetricsRecord{}
 		record.Partition = "some key"
 		data := MetricsData{}
