@@ -75,7 +75,7 @@ func Run(cmd commands.Command) error {
 	// parse the args, skipping the 'detail' namespace
 	cmd.Set.Parse(os.Args[2:])
 
-	startDate, endDate, period, sendToApi, account, env, _, err := parseCommand(cmd)
+	startDate, endDate, period, sendToApi, account, env, service, err := parseCommand(cmd)
 	if err != nil {
 		return err
 	}
@@ -93,12 +93,13 @@ func Run(cmd commands.Command) error {
 			account accounts.Account,
 			start time.Time,
 			end time.Time,
-			period string) {
+			period string,
+			service string) {
 
-			data, _ := costs.Blended(account, start, end, period)
+			data, _ := costs.Blended(account, start, end, period, service)
 			costData = append(costData, data...)
 			wg.Done()
-		}(a, startDate, endDate, period)
+		}(a, startDate, endDate, period, service)
 	}
 	wg.Wait()
 

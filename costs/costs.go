@@ -2,6 +2,7 @@ package costs
 
 import (
 	"opg-infra-costs/accounts"
+	"strings"
 	"time"
 )
 
@@ -10,7 +11,8 @@ func Blended(
 	account accounts.Account,
 	start time.Time,
 	end time.Time,
-	granularity string) ([]CostRow, error) {
+	granularity string,
+	filterByService string) ([]CostRow, error) {
 
 	svc, err := Client(account)
 	if err != nil {
@@ -36,7 +38,10 @@ func Blended(
 					Cost:    *metrics.Amount,
 					Account: account,
 				}
-				resultsCosts = append(resultsCosts, r)
+				if len(filterByService) == 0 ||
+					strings.Contains(strings.ToUpper(r.Service), strings.ToUpper(filterByService)) {
+					resultsCosts = append(resultsCosts, r)
+				}
 			}
 		}
 	}
