@@ -39,6 +39,7 @@ func Blended(
 					Cost:    *metrics.Amount,
 					Account: account,
 				}
+				// if there is no filter, or if the filter contained in the service name
 				if len(filterByService) == 0 ||
 					strings.Contains(strings.ToUpper(r.Service), strings.ToUpper(filterByService)) {
 					resultsCosts = append(resultsCosts, r)
