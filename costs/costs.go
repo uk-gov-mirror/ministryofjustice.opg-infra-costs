@@ -7,7 +7,7 @@ import (
 )
 
 // Blended returns an array of all costs data
-func Blended(
+func Unblended(
 	account accounts.Account,
 	start time.Time,
 	end time.Time,
@@ -18,7 +18,7 @@ func Blended(
 	if err != nil {
 		return nil, err
 	}
-	input := CostAndUsageInput(start, end, granularity, "BLENDED_COST")
+	input := CostAndUsageInput(start, end, granularity, "UNBLENDED_COST")
 	req, resp := svc.GetCostAndUsageRequest(input)
 
 	err = req.Send()
