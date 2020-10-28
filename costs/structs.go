@@ -12,7 +12,7 @@ type CostRow struct {
 	Account accounts.Account
 }
 
-func (c CostRow) asMap() map[string]string {
+func (c *CostRow) asMap() map[string]string {
 	return map[string]string{
 		"Date":    c.Date,
 		"Service": c.Service,
@@ -21,7 +21,7 @@ func (c CostRow) asMap() map[string]string {
 }
 
 // Get helper
-func (c CostRow) Get(prop string) string {
+func (c *CostRow) Get(prop string) string {
 	// pass down to account
 	if strings.Contains(prop, "Account.") {
 		return c.Account.Get(strings.ReplaceAll(prop, "Account.", ""))

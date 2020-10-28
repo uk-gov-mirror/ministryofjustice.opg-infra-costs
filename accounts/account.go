@@ -8,7 +8,7 @@ type Account struct {
 	Region      string `default:"eu-west-1"`
 }
 
-func (a Account) asMap() map[string]string {
+func (a *Account) asMap() map[string]string {
 	return map[string]string{
 		"Id":          a.Id,
 		"Name":        a.Name,
@@ -19,11 +19,11 @@ func (a Account) asMap() map[string]string {
 }
 
 // Arn returns the aws ARN formatted string
-func (a Account) Arn() string {
+func (a *Account) Arn() string {
 	return "arn:aws:iam::" + a.Id + ":role/" + a.Role
 }
 
 // Get returns property
-func (a Account) Get(prop string) string {
+func (a *Account) Get(prop string) string {
 	return a.asMap()[prop]
 }
