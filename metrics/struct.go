@@ -1,6 +1,7 @@
 package metrics
 
 import (
+	"fmt"
 	"opg-infra-costs/costs"
 	"opg-infra-costs/dates"
 	"strconv"
@@ -21,13 +22,15 @@ type MetricsData struct {
 	Time             string `json:"Time"`
 }
 
+// FromCostRow converts a CostRow struct to a MetricsData Structure for sending
+// to the API
 func (md *MetricsData) FromCostRow(cr costs.CostRow) {
 	md.Dimensions = "dimensions"
 	md.Project = cr.Account.Name
 	md.Service = cr.Service
 	md.Environment = cr.Account.Environment
 	md.MeasureName = "cost"
-	md.MeasureValue = cr.Cost
+	md.MeasureValue = fmt.Sprintf("%f", cr.Cost)
 	md.MeasureValueType = "DOUBLE"
 	mytime, _ := time.Parse(dates.AWSDateFormat(), cr.Date)
 	t := mytime.UnixNano() / int64(time.Millisecond)
@@ -43,6 +46,8 @@ type MetricsPutData struct {
 	Records []MetricsRecord `json:"records"`
 }
 
+// FromCosts converts CostData struct to a json byte array ready for sending
+// in http call
 func FromCosts(costs costs.CostData, limit int) ([]byte, error) {
 	mpd := MetricsPutData{}
 

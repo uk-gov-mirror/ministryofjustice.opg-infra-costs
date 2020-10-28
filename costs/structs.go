@@ -1,15 +1,15 @@
 package costs
 
 import (
+	"fmt"
 	"opg-infra-costs/accounts"
-	"strconv"
 	"strings"
 )
 
 type CostRow struct {
 	Date    string
 	Service string
-	Cost    string
+	Cost    float64
 	Account accounts.Account
 }
 
@@ -17,7 +17,7 @@ func (c *CostRow) asMap() map[string]string {
 	return map[string]string{
 		"Date":    c.Date,
 		"Service": c.Service,
-		"Cost":    c.Cost,
+		"Cost":    fmt.Sprintf("%f", c.Cost),
 	}
 }
 
@@ -38,8 +38,7 @@ type CostData struct {
 func (cd *CostData) Total() float64 {
 	total := 0.0
 	for _, r := range cd.Entries {
-		val, _ := strconv.ParseFloat(r.Cost, 64)
-		total = total + val
+		total = total + r.Cost
 	}
 	return total
 }

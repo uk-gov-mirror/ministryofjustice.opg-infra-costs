@@ -2,6 +2,7 @@ package costs
 
 import (
 	"opg-infra-costs/accounts"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -33,10 +34,11 @@ func Unblended(
 		startDate := *results.TimePeriod.Start
 		for _, groups := range results.Groups {
 			for _, metrics := range groups.Metrics {
+				fVal, _ := strconv.ParseFloat(*metrics.Amount, 64)
 				r := CostRow{
 					Date:    startDate,
 					Service: *groups.Keys[0],
-					Cost:    *metrics.Amount,
+					Cost:    fVal,
 					Account: account,
 				}
 				// if there is no filter, or if the filter contained in the service name
