@@ -144,3 +144,13 @@ opg-infra-costs mtd \
 ```
 
 This command would display total cost for sirius' dev environment.
+
+#### Show a small tabular breakdown
+
+Instead of getting just top line, you may want to see the costs for each version of sirius individually as well (so seeing line cost for dev, pre-prod & prod):
+
+```bash
+opg-infra-costs mtd \
+-account="sirius" \
+-breakdown
+```
