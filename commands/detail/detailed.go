@@ -98,13 +98,13 @@ func Run(cmd commands.Command) error {
 	}
 	wg.Wait()
 
-	headers := []string{"Account", "Project", "Environment", "Service", "Date", "Cost"}
-	row := []string{"Account.Id", "Account.Name", "Account.Environment", "Service", "Date", "Cost"}
 	// how do we output this - table is default
 	switch outputAs {
 	case "API":
 		metrics.SendToApi(costData)
 	default:
+		headers := []string{"Id", "AccountName", "Environment", "AWS Service", "Date", "Cost"}
+		row := []string{"Account.Id", "Account.Name", "Account.Environment", "Service", "Date", "Cost"}
 		tabular.Table(costData, headers, row)
 	}
 
