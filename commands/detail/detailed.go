@@ -10,7 +10,6 @@ import (
 	"opg-infra-costs/tabular"
 	"os"
 	"strings"
-	"sync"
 	"time"
 )
 
@@ -91,25 +90,13 @@ func Run(cmd commands.Command) error {
 	}
 
 	allAccounts := accounts.Filtered(account, env)
-	var costData costs.CostData
 	// concurrency on the api calls to aws
-	var wg sync.WaitGroup
-
-	for _, a := range allAccounts {
-		wg.Add(1)
-		go func(
-			account accounts.Account,
-			start time.Time,
-			end time.Time,
-			period string,
-			service string) {
-
-			data, _ := costs.Unblended(account, start, end, period, service)
-			costData.Entries = append(costData.Entries, data...)
-			wg.Done()
-		}(a, startDate, endDate, period, service)
-	}
-	wg.Wait()
+	costData := costs.AsyncCosts(
+		&allAccounts,
+		startDate,
+		endDate,
+		period,
+		service)
 
 	l := len(groupBy) + len(cols) + len(headers)
 	if l > 0 {

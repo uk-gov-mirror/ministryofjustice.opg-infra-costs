@@ -8,7 +8,6 @@ import (
 	"opg-infra-costs/dates"
 	"opg-infra-costs/metrics"
 	"os"
-	"sync"
 	"time"
 )
 
@@ -30,24 +29,12 @@ func Run(cmd commands.Command) error {
 	period := "DAILY"
 
 	allAccounts := accounts.List()
-	var costData costs.CostData
-	// concurrency on the api calls to aws
-	var wg sync.WaitGroup
-
-	for _, a := range allAccounts {
-		wg.Add(1)
-		go func(
-			account accounts.Account,
-			start time.Time,
-			end time.Time,
-			period string) {
-
-			data, _ := costs.Unblended(account, start, end, period, "")
-			costData.Entries = append(costData.Entries, data...)
-			wg.Done()
-		}(a, startDate, endDate, period)
-	}
-	wg.Wait()
+	costData := costs.AsyncCosts(
+		&allAccounts,
+		startDate,
+		endDate,
+		period,
+		"")
 
 	metrics.SendToApi(costData)
 
