@@ -21,8 +21,8 @@ func (cd *CostData) GroupByKeys(keys []string) CostData {
 		}
 		// convert back to string
 		sum := foundFloat + c.Cost
+		found = c
 		found.Cost = sum
-		found.Account = c.Account
 		mapped[key] = found
 	}
 	// add to the costs - range does not give order

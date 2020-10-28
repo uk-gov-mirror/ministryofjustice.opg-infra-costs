@@ -7,9 +7,9 @@ import (
 	"opg-infra-costs/commands"
 	"opg-infra-costs/costs"
 	"opg-infra-costs/dates"
-	"opg-infra-costs/metrics"
 	"opg-infra-costs/tabular"
 	"os"
+	"strings"
 	"sync"
 	"time"
 )
@@ -22,7 +22,10 @@ func Command() (commands.Command, error) {
 	commands.ArgumentStandardDateRestrictions(set)
 	commands.ArgumentStandardFilters(set)
 	set.String("granularity", "DAILY", "Grouping for the cost data to be either DAILY or MONTHLY")
-	set.String("output-as", "TABLE", "Output the cost data as one of the following {TABLE|API}")
+
+	set.String("data-group-by", "", "Group the data by columns within cost - eg `Account.Name,Account.Environment` - would merge cost data to that level")
+	set.String("data-columns", "", "Display these column - eg `Account.Name,Account.Environment,Cost` - needs to align with data-group-by")
+	set.String("data-headers", "", "Header names for columns - eg `AccountName,Environment,Cost` - needs to align with data-group-by")
 
 	cmd.Set = set
 	return cmd, nil
@@ -35,10 +38,12 @@ func parseCommand(
 	start time.Time,
 	end time.Time,
 	period string,
-	outputAs string,
 	accountName string,
 	environment string,
 	service string,
+	groupBy []string,
+	cols []string,
+	headers []string,
 	err error) {
 
 	dateFormat := dates.DateFormat()
@@ -52,10 +57,18 @@ func parseCommand(
 	accountName = cmdSet.Lookup("account").Value.String()
 	environment = cmdSet.Lookup("env").Value.String()
 	service = cmdSet.Lookup("service").Value.String()
-
-	outputAs = cmdSet.Lookup("output-as").Value.String()
-	if outputAs != "TABLE" && outputAs != "API" && outputAs != "XLSX" {
-		err = fmt.Errorf("Output as is invalid [%v]", outputAs)
+	// split these by ,
+	gs := cmdSet.Lookup("data-group-by").Value.String()
+	if len(gs) > 1 {
+		groupBy = strings.Split(gs, ",")
+	}
+	c := cmdSet.Lookup("data-columns").Value.String()
+	if len(c) > 1 {
+		cols = strings.Split(c, ",")
+	}
+	h := cmdSet.Lookup("data-headers").Value.String()
+	if len(h) > 1 {
+		headers = strings.Split(h, ",")
 	}
 
 	period = cmdSet.Lookup("granularity").Value.String()
@@ -72,7 +85,7 @@ func Run(cmd commands.Command) error {
 	// parse the args, skipping the 'detail' namespace
 	cmd.Set.Parse(os.Args[2:])
 	// get all the command arguments
-	startDate, endDate, period, outputAs, account, env, service, err := parseCommand(cmd)
+	startDate, endDate, period, account, env, service, groupBy, cols, headers, err := parseCommand(cmd)
 	if err != nil {
 		return err
 	}
@@ -98,14 +111,15 @@ func Run(cmd commands.Command) error {
 	}
 	wg.Wait()
 
-	// how do we output this - table is default
-	switch outputAs {
-	case "API":
-		metrics.SendToApi(costData)
-	default:
-		headers := []string{"Id", "AccountName", "Environment", "AWS Service", "Date", "Cost"}
-		row := []string{"Account.Id", "Account.Name", "Account.Environment", "Service", "Date", "Cost"}
-		tabular.Table(costData, headers, row)
+	l := len(groupBy) + len(cols) + len(headers)
+	if l > 0 {
+		grouped := costData.GroupByKeys(groupBy)
+		tabular.Table(grouped, headers, cols)
+
+	} else {
+		headers = []string{"Id", "AccountName", "Environment", "AWS Service", "Date", "Cost"}
+		cols = []string{"Account.Id", "Account.Name", "Account.Environment", "Service", "Date", "Cost"}
+		tabular.Table(costData, headers, cols)
 	}
 
 	return nil
