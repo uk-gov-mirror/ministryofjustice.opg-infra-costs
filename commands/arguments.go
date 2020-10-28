@@ -10,7 +10,7 @@ import (
 func ArgumentStandardFilters(set *flag.FlagSet) {
 
 	set.String("account", "", "Limit the accounts list to only this *name* only - eg Sirius")
-	set.String("environment", "", "Limit the accounts list to only this environment")
+	set.String("env", "", "Limit the accounts list to only this environment")
 	set.String("service", "", "Limit the aws services to only this service name (uppercase)")
 
 }

@@ -50,7 +50,7 @@ func parseCommand(
 	end, err = time.Parse(dateFormat, endStr)
 
 	accountName = cmdSet.Lookup("account").Value.String()
-	environment = cmdSet.Lookup("environment").Value.String()
+	environment = cmdSet.Lookup("env").Value.String()
 	service = cmdSet.Lookup("service").Value.String()
 
 	outputAs = cmdSet.Lookup("output-as").Value.String()
