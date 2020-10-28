@@ -91,19 +91,21 @@ func Run(cmd commands.Command) error {
 			period string,
 			service string) {
 
-			data, _ := costs.Blended(account, start, end, period, service)
+			data, _ := costs.Unblended(account, start, end, period, service)
 			costData.Entries = append(costData.Entries, data...)
 			wg.Done()
 		}(a, startDate, endDate, period, service)
 	}
 	wg.Wait()
 
+	headers := []string{"Account", "Project", "Environment", "Service", "Date", "Cost"}
+	row := []string{"Account.Id", "Account.Name", "Account.Environment", "Service", "Date", "Cost"}
 	// how do we output this - table is default
 	switch outputAs {
 	case "API":
 		metrics.SendToApi(costData)
 	default:
-		tabular.Table(costData)
+		tabular.Table(costData, headers, row)
 	}
 
 	return nil

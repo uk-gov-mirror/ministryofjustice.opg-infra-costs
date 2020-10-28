@@ -7,22 +7,27 @@ import (
 	"github.com/rodaine/table"
 )
 
-func Table(costs costs.CostData) {
+func Table(costs costs.CostData, headers []string, rowKeys []string) {
+	// convert the string array to interfaces for the table new command
+	headersInterfaces := make([]interface{}, len(headers))
+	for i := range headers {
+		headersInterfaces[i] = headers[i]
+	}
 
 	headerFmt := color.New(color.FgGreen, color.Underline).SprintfFunc()
 	columnFmt := color.New(color.FgYellow).SprintfFunc()
 
-	tbl := table.New("Account", "Project", "Environment", "Service", "Date", "Cost")
+	tbl := table.New(headersInterfaces...)
 	tbl.WithHeaderFormatter(headerFmt).WithFirstColumnFormatter(columnFmt)
 
 	for _, row := range costs.Entries {
-		tbl.AddRow(
-			row.Account.Id,
-			row.Account.Name,
-			row.Account.Environment,
-			row.Service,
-			row.Date,
-			row.Cost)
+		//
+		inter := make([]interface{}, len(rowKeys))
+		for x := range rowKeys {
+			inter[x] = row.Get(rowKeys[x])
+		}
+
+		tbl.AddRow(inter...)
 	}
 	tbl.Print()
 }
