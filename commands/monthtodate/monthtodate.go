@@ -43,7 +43,7 @@ func parseCommand(
 	service = cmdSet.Lookup("service").Value.String()
 
 	bdown := cmdSet.Lookup("breakdown").Value.String()
-	if len(bdown) > 0 {
+	if bdown == "true" {
 		breakdown = true
 	} else {
 		breakdown = false
