@@ -2,6 +2,7 @@ package costs
 
 import (
 	"opg-infra-costs/accounts"
+	"strconv"
 	"strings"
 )
 
@@ -31,4 +32,14 @@ func (c *CostRow) Get(prop string) string {
 
 type CostData struct {
 	Entries []CostRow
+}
+
+// Total returns grand total of .Entries
+func (cd *CostData) Total() float64 {
+	total := 0.0
+	for _, r := range cd.Entries {
+		val, _ := strconv.ParseFloat(r.Cost, 64)
+		total = total + val
+	}
+	return total
 }
