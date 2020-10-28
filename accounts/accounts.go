@@ -11,7 +11,7 @@ func List() []Account {
 	list = append(list,
 		// shared accounts
 		Account{Id: "995199299616", Name: "Sandbox", Environment: "Sandbox", Role: "breakglass"},
-		Account{Id: "631181914621", Name: "Identity", Environment: "Identity", Role: "breakglass"},
+		Account{Id: "631181914621", Name: "ORG", Environment: "Identity", Role: "breakglass"},
 		// sirius
 		Account{Id: "288342028542", Name: "Sirius", Environment: "Dev", Role: "breakglass"},
 		Account{Id: "492687888235", Name: "Sirius", Environment: "Preprod", Role: "breakglass"},
