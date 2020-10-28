@@ -22,7 +22,7 @@ func Command() (commands.Command, error) {
 	commands.ArgumentStandardDateRestrictions(set)
 	commands.ArgumentStandardFilters(set)
 	set.String("granularity", "DAILY", "Grouping for the cost data to be either DAILY or MONTHLY")
-	set.String("output-as", "TABLE", "Output the cost data as one of the following {TABLE|API|XLSX}")
+	set.String("output-as", "TABLE", "Output the cost data as one of the following {TABLE|API}")
 
 	cmd.Set = set
 	return cmd, nil
