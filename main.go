@@ -34,16 +34,22 @@ func main() {
 	if len(os.Args) < 2 {
 		usage(allCmds)
 	}
+	var err error
 
 	switch os.Args[1] {
 	case detailCmd.Name:
-		detail.Run(detailCmd)
+		err = detail.Run(detailCmd)
 	case mtdCmd.Name:
-		monthtodate.Run(mtdCmd)
+		err = monthtodate.Run(mtdCmd)
 	case metricsCmd.Name:
-		sendtometrics.Run(metricsCmd)
+		err = sendtometrics.Run(metricsCmd)
 	default:
 		usage(allCmds)
+	}
+
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
 	}
 
 }

@@ -1,11 +1,13 @@
 package costs
 
 import (
+	"fmt"
 	"opg-infra-costs/accounts"
 	"sync"
 	"time"
 )
 
+// AyncCosts calls the AWS api
 func AsyncCosts(
 	allAccounts *[]accounts.Account,
 	startDate time.Time,
@@ -25,7 +27,11 @@ func AsyncCosts(
 			period string,
 			service string) {
 
-			data, _ := Unblended(account, start, end, period, service)
+			data, e := Unblended(account, start, end, period, service)
+			// improve this!
+			if e != nil {
+				fmt.Printf("[error] %v", e)
+			}
 			costData.Entries = append(costData.Entries, data...)
 			wg.Done()
 		}(a, startDate, endDate, period, service)
