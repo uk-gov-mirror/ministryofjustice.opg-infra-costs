@@ -67,7 +67,7 @@ func Run(cmd commands.Command) error {
 	// get all the command arguments
 	a, b, account, env, increaseP, baseCost, err := parseCommand(cmd)
 	period := "MONTHLY"
-
+	df := dates.AWSDateFormatYM()
 	if err != nil {
 		return err
 	}
@@ -124,8 +124,8 @@ func Run(cmd commands.Command) error {
 		}
 	}
 
-	headers := []string{"Id", "AccountName", "Environment", "AWS Service", "A Cost ($)", "B  Cost ($)", "Diff ($)", "Diff (%)"}
-	cols := []string{"Account.Id", "Account.Name", "Account.Environment", "Service", "Meta.A", "Meta.B", "Meta.Diff", "Meta.P"}
+	headers := []string{"Id", "AccountName", "Environment", "AWS Service", fmt.Sprintf("B: %v ($)", b.Format(df)), fmt.Sprintf("A: %v ($)", a.Format(df)), "Diff ($)", "Diff (%)"}
+	cols := []string{"Account.Id", "Account.Name", "Account.Environment", "Service", "Meta.B", "Meta.A", "Meta.Diff", "Meta.P"}
 	tabular.Table(increasedCosts, headers, cols)
 
 	return nil
