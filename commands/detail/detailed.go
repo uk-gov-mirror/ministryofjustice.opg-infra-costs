@@ -19,7 +19,7 @@ func Command() (commands.Command, error) {
 	set := flag.NewFlagSet(cmd.Name, flag.ExitOnError)
 
 	commands.ArgumentStandardDateRestrictions(set)
-	commands.ArgumentStandardFilters(set)
+	commands.ArgumentStandardFilters(set, true)
 	set.String("granularity", "DAILY", "Grouping for the cost data to be either DAILY or MONTHLY")
 
 	set.String("data-group-by", "", "Group the data by columns within cost - eg `Account.Name,Account.Environment` - would merge cost data to that level")

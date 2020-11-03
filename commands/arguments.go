@@ -7,11 +7,13 @@ import (
 )
 
 // ArgumentStandardFilters adds flags for standard options
-func ArgumentStandardFilters(set *flag.FlagSet) {
+func ArgumentStandardFilters(set *flag.FlagSet, withService bool) {
 
 	set.String("account", "", "Limit the accounts list to only this *name* only - eg Sirius")
 	set.String("env", "", "Limit the accounts list to only this environment")
-	set.String("service", "", "Limit the aws services to only this service name (uppercase)")
+	if withService {
+		set.String("service", "", "Limit the aws services to only this service name (uppercase)")
+	}
 
 }
 

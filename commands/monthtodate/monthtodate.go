@@ -18,7 +18,7 @@ func Command() (commands.Command, error) {
 	cmd := commands.Command{Name: "mtd"}
 	set := flag.NewFlagSet(cmd.Name, flag.ExitOnError)
 
-	commands.ArgumentStandardFilters(set)
+	commands.ArgumentStandardFilters(set, true)
 	set.Bool("breakdown", false, "Include a tablurar breakdown grouped by account and envrionment")
 
 	cmd.Set = set
