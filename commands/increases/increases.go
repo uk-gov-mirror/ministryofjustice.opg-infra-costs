@@ -66,7 +66,6 @@ func Run(cmd commands.Command) error {
 	cmd.Set.Parse(os.Args[2:])
 	// get all the command arguments
 	a, b, account, env, increaseP, baseCost, err := parseCommand(cmd)
-	fmt.Printf("%v\n%v\n", a, b)
 	period := "MONTHLY"
 
 	if err != nil {

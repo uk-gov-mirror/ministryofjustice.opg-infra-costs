@@ -154,3 +154,61 @@ opg-infra-costs mtd \
 -account="sirius" \
 -breakdown
 ```
+
+
+### Cost Increases
+
+Command `increases` compares two sets of monthly cost data and flags significant increases in value between services.
+
+```bash
+opg-infra-costs increases
+```
+
+#### Selecting months
+
+Change the two months being compared over all accounts
+
+```bash
+opg-infra-costs increases \
+-a="2020-09" \
+-b="2020-10"
+```
+
+#### Filtering
+
+You can limit the account and environment being searched for in the same was as `detail` command:
+
+```bash
+opg-infra-costs increases \
+-account="sirius" \
+-env="prod"
+```
+
+#### Change percentage trigger
+
+Adjust the percentage change to flag as an increase cost:
+
+```bash
+opg-infra-costs increases \
+-percentage-change=50
+```
+
+#### Change ignore cost barrier
+
+As we are likely to get large percentage changes on low value items we set a base cost level to detection. Any cost below this is not included in the cost comparison.
+
+```bash
+opg-infra-costs increases \
+-baseline-cost=100
+```
+
+This would exclude any line item cost below $100 in value from the comparision table
+
+
+### Metrics
+
+*WIP* - Command to send data to the mentrics api end point
+
+```bash
+opg-infra-costs metrics
+```
