@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"opg-infra-costs/commands"
 	"opg-infra-costs/commands/detail"
+	"opg-infra-costs/commands/increases"
 	"opg-infra-costs/commands/monthtodate"
 	"opg-infra-costs/commands/sendtometrics"
 	"os"
@@ -25,9 +26,11 @@ func main() {
 
 	detailCmd, _ := detail.Command()
 	mtdCmd, _ := monthtodate.Command()
+	increasesCmd, _ := increases.Command()
 	metricsCmd, _ := sendtometrics.Command()
 	allCmds := []commands.Command{
 		detailCmd,
+		increasesCmd,
 		mtdCmd,
 		metricsCmd}
 
@@ -37,6 +40,8 @@ func main() {
 	var err error
 
 	switch os.Args[1] {
+	case increasesCmd.Name:
+		err = increases.Run(increasesCmd)
 	case detailCmd.Name:
 		err = detail.Run(detailCmd)
 	case mtdCmd.Name:
