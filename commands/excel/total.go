@@ -19,7 +19,7 @@ func totalsByMonth(spreadsheet *excelize.File,
 	period string) {
 
 	//get costs
-	costData := costs.AsyncCosts(
+	costData, _ := costs.AsyncCosts(
 		accounts,
 		startDate,
 		endDate,

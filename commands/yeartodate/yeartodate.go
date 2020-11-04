@@ -69,7 +69,7 @@ func Run(cmd commands.Command) error {
 
 	allAccounts := accounts.Filtered(account, env)
 	period := "MONTHLY"
-	costData := costs.AsyncCosts(
+	costData, _ := costs.AsyncCosts(
 		&allAccounts,
 		startDate,
 		endDate,

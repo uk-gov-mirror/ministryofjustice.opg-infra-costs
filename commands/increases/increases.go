@@ -76,14 +76,14 @@ func Run(cmd commands.Command) error {
 	// get all accounts
 	allAccounts := accounts.Filtered(account, env)
 	// get costs for both periods for all accounts
-	costDataA := costs.AsyncCosts(
+	costDataA, _ := costs.AsyncCosts(
 		&allAccounts,
 		a,
 		a.AddDate(0, 1, 0),
 		period,
 		"")
 
-	costDataB := costs.AsyncCosts(
+	costDataB, _ := costs.AsyncCosts(
 		&allAccounts,
 		b,
 		b.AddDate(0, 1, 0),

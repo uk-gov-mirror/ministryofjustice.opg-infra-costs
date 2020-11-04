@@ -29,7 +29,7 @@ func Run(cmd commands.Command) error {
 	period := "DAILY"
 
 	allAccounts := accounts.List()
-	costData := costs.AsyncCosts(
+	costData, _ := costs.AsyncCosts(
 		&allAccounts,
 		startDate,
 		endDate,

@@ -91,7 +91,7 @@ func Run(cmd commands.Command) error {
 
 	allAccounts := accounts.Filtered(account, env)
 	// concurrency on the api calls to aws
-	costData := costs.AsyncCosts(
+	costData, _ := costs.AsyncCosts(
 		&allAccounts,
 		startDate,
 		endDate,
