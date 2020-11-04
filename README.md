@@ -155,6 +155,16 @@ opg-infra-costs mtd \
 -breakdown
 ```
 
+### YTD - Year to Date
+
+Year to date provides a simple top line number by default for the current years total costs:
+
+```bash
+opg-infra-costs ytd
+```
+
+Provides the same filtering as `mtd` account
+
 
 ### Cost Increases
 
