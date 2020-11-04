@@ -34,16 +34,20 @@ func Unblended(
 		startDate := *results.TimePeriod.Start
 		for _, groups := range results.Groups {
 			for _, metrics := range groups.Metrics {
-				fVal, _ := strconv.ParseFloat(*metrics.Amount, 64)
+
+				fVal, e := strconv.ParseFloat(*metrics.Amount, 64)
+				if e != nil {
+					return resultsCosts, e
+				}
 				r := CostRow{
 					Date:    startDate,
 					Service: *groups.Keys[0],
 					Cost:    fVal,
 					Account: account,
 				}
+				l := len(filterByService)
 				// if there is no filter, or if the filter contained in the service name
-				if len(filterByService) == 0 ||
-					strings.Contains(strings.ToUpper(r.Service), strings.ToUpper(filterByService)) {
+				if l == 0 || (l > 0 && strings.Contains(strings.ToUpper(r.Service), strings.ToUpper(filterByService))) {
 					resultsCosts = append(resultsCosts, r)
 				}
 			}

@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"opg-infra-costs/commands"
 	"opg-infra-costs/commands/detail"
+	"opg-infra-costs/commands/excel"
 	"opg-infra-costs/commands/increases"
 	"opg-infra-costs/commands/monthtodate"
 	"opg-infra-costs/commands/sendtometrics"
+	"opg-infra-costs/commands/yeartodate"
 	"os"
 )
 
@@ -25,13 +27,17 @@ func usage(commands []commands.Command) {
 func main() {
 
 	detailCmd, _ := detail.Command()
+	excelCmd, _ := excel.Command()
 	mtdCmd, _ := monthtodate.Command()
+	ytdCmd, _ := yeartodate.Command()
 	increasesCmd, _ := increases.Command()
 	metricsCmd, _ := sendtometrics.Command()
 	allCmds := []commands.Command{
 		detailCmd,
+		excelCmd,
 		increasesCmd,
 		mtdCmd,
+		ytdCmd,
 		metricsCmd}
 
 	if len(os.Args) < 2 {
@@ -44,8 +50,12 @@ func main() {
 		err = increases.Run(increasesCmd)
 	case detailCmd.Name:
 		err = detail.Run(detailCmd)
+	case excelCmd.Name:
+		err = excel.Run(excelCmd)
 	case mtdCmd.Name:
 		err = monthtodate.Run(mtdCmd)
+	case ytdCmd.Name:
+		err = yeartodate.Run(ytdCmd)
 	case metricsCmd.Name:
 		err = sendtometrics.Run(metricsCmd)
 	default:
