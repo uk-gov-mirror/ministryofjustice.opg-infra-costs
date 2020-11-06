@@ -5,7 +5,6 @@ import (
 	"opg-infra-costs/accounts"
 	"opg-infra-costs/costs"
 	"opg-infra-costs/dates"
-	"opg-infra-costs/tabular"
 	"time"
 
 	"github.com/360EntSecGroup-Skylar/excelize"
@@ -13,26 +12,15 @@ import (
 
 func totalsByMonth(spreadsheet *excelize.File,
 	accounts *[]accounts.Account,
-	startDate time.Time,
-	endDate time.Time,
-	months []time.Time,
-	period string) {
+	costData *costs.CostData,
+	months []time.Time) {
 
-	//get costs
-	costData, _ := costs.AsyncCosts(
-		accounts,
-		startDate,
-		endDate,
-		period,
-		"")
-
-	headers := []string{"Date", "Cost"}
-	row := []string{"Date", "Cost"}
+	// headers := []string{"Date", "Cost"}
+	// row := []string{"Date", "Cost"}
 	group := []string{"Date"}
 
-	grouped := costData.GroupByKeys(group)
-	tabular.Table(grouped, headers, row)
-
+	//grouped := costData.GroupByKeys(group)
+	//tabular.Table(grouped, headers, row)
 	groupMap := costData.GroupByKeysMap(group)
 	// setup the spreadsheet
 	sheet := "Totals"

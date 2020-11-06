@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"opg-infra-costs/accounts"
 	"opg-infra-costs/commands"
+	"opg-infra-costs/costs"
 	"opg-infra-costs/dates"
 	"os"
 	"time"
@@ -42,13 +43,25 @@ func Run(cmd commands.Command) error {
 	// use all accounts
 	allAccounts := accounts.Filtered(account, env)
 
-	totalsByMonth(
-		spreadsheet,
+	// get cost data
+	costData, _ := costs.AsyncCosts(
 		&allAccounts,
 		startDate,
 		endDate,
-		dateHeaders,
-		period)
+		period,
+		"")
+
+	totalsByMonth(
+		spreadsheet,
+		&allAccounts,
+		&costData,
+		dateHeaders)
+
+	totalsByMonthAndProject(
+		spreadsheet,
+		&allAccounts,
+		&costData,
+		dateHeaders)
 
 	return nil
 
