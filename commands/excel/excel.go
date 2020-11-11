@@ -7,6 +7,7 @@ import (
 	"opg-infra-costs/commands"
 	"opg-infra-costs/costs"
 	"opg-infra-costs/dates"
+	"opg-infra-costs/spreadsheet"
 	"os"
 	"time"
 )
@@ -39,8 +40,8 @@ func Run(cmd commands.Command) error {
 	// create date headers for columns
 	dateHeaders := dates.Months(startDate, endDate, dates.AWSDateFormatYM())
 	// create the spreadsheet
-	spreadsheet, _ := spreadsheet()
-	// use all accounts
+	ss, _ := spreadsheet.New()
+
 	allAccounts := accounts.Filtered(account, env)
 
 	// get cost data
@@ -51,14 +52,14 @@ func Run(cmd commands.Command) error {
 		period,
 		"")
 
-	totalsByMonth(
-		spreadsheet,
+	spreadsheet.TotalsByMonth(
+		ss,
 		&allAccounts,
 		&costData,
 		dateHeaders)
 
-	totalsByMonthAndProject(
-		spreadsheet,
+	spreadsheet.TotalsByMonthAndProject(
+		ss,
 		&allAccounts,
 		&costData,
 		dateHeaders)

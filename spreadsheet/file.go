@@ -1,8 +1,8 @@
-package excel
+package spreadsheet
 
 import "github.com/360EntSecGroup-Skylar/excelize"
 
-func spreadsheet() (*excelize.File, error) {
+func New() (*excelize.File, error) {
 	filename := "costs.xlsx"
 	f := excelize.NewFile()
 	err := f.SaveAs(filename)

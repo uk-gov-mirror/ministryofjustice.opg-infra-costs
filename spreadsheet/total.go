@@ -1,4 +1,4 @@
-package excel
+package spreadsheet
 
 import (
 	"fmt"
@@ -10,7 +10,7 @@ import (
 	"github.com/360EntSecGroup-Skylar/excelize"
 )
 
-func totalsByMonth(spreadsheet *excelize.File,
+func TotalsByMonth(spreadsheet *excelize.File,
 	accounts *[]accounts.Account,
 	costData *costs.CostData,
 	months []time.Time) {
