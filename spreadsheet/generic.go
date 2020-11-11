@@ -17,7 +17,11 @@ func writeDataToSheet(
 
 	// create the new sheet
 	i := spreadsheet.NewSheet(sheet)
-	spreadsheet.SetActiveSheet(i)
+	if sheet == "Totals" {
+		spreadsheet.SetActiveSheet(i)
+		//remove sheet1 default
+		spreadsheet.DeleteSheet("Sheet1")
+	}
 
 	// restructure data to map to excel layout
 	excel := map[string]map[string]string{}
