@@ -88,8 +88,7 @@ func writeDataToSheet(
 		"A1",
 		max,
 		`{
-			"table_name": "table",
-			"table_style": "TableStyleLight13"
+			"table_style": "TableStyleMedium9"
 		}`)
 
 	spreadsheet.AutoFilter(
