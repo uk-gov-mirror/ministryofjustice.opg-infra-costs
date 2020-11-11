@@ -3,6 +3,7 @@ package spreadsheet
 import (
 	"fmt"
 	"opg-infra-costs/costs"
+	"strconv"
 
 	"github.com/360EntSecGroup-Skylar/excelize"
 )
@@ -42,6 +43,8 @@ func writeDataToSheet(
 	// now write headers to spreadsheet
 	row := 1
 	col := 'A'
+	maxcol := 'A'
+
 	for _, h := range headers {
 		c := string(col)
 		cell := fmt.Sprintf("%s%v", c, row)
@@ -54,7 +57,7 @@ func writeDataToSheet(
 		spreadsheet.SetCellValue(sheet, cell, m)
 		col++
 	}
-
+	maxcol = col
 	// now write data to spreadsheet
 	for _, dataRow := range excel {
 		// set col and row
@@ -71,11 +74,29 @@ func writeDataToSheet(
 		for _, m := range dates {
 			c := string(col)
 			cell := fmt.Sprintf("%s%v", c, row)
-			spreadsheet.SetCellValue(sheet, cell, dataRow[m])
+			v, _ := strconv.ParseFloat(dataRow[m], 64)
+			spreadsheet.SetCellValue(sheet, cell, v)
 			col++
 		}
 
 	}
+
+	// add the table and filtering options
+	max := fmt.Sprintf("%v%v", string(maxcol-1), row)
+	spreadsheet.AddTable(
+		sheet,
+		"A1",
+		max,
+		`{
+			"table_name": "table",
+			"table_style": "TableStyleLight13"
+		}`)
+
+	spreadsheet.AutoFilter(
+		sheet,
+		"A1",
+		max,
+		"")
 
 	return nil
 }

@@ -1,7 +1,6 @@
 package spreadsheet
 
 import (
-	"fmt"
 	"opg-infra-costs/costs"
 	"opg-infra-costs/dates"
 	"sort"
@@ -10,6 +9,8 @@ import (
 	"github.com/360EntSecGroup-Skylar/excelize"
 )
 
+// ToExcel converts the cost data to mapped and grouped version
+// and generate month headers to write to file
 func ToExcel(
 	spreadsheet *excelize.File,
 	sheet string,
@@ -37,8 +38,7 @@ func ToExcel(
 		groupMap)
 
 	// save!
-	if err = spreadsheet.SaveAs(spreadsheet.Path); err != nil {
-		fmt.Printf("FAILED: %v\n", err)
-	}
+	err = spreadsheet.SaveAs(spreadsheet.Path)
+
 	return err
 }
