@@ -1,6 +1,7 @@
 package costs
 
 import (
+	"fmt"
 	"sort"
 	"strings"
 )
@@ -23,7 +24,7 @@ func (cd *CostData) GroupByKeysMap(keys []string) map[string]CostRow {
 		found := CostRow{}
 		ok := false
 		foundFloat := 0.0
-		key := cd.groupKey(keys, &c)
+		key := GenerateGroupKey(keys, &c)
 		// if found, then sum
 		if found, ok = mapped[key]; ok {
 			foundFloat = found.Cost
@@ -38,12 +39,14 @@ func (cd *CostData) GroupByKeysMap(keys []string) map[string]CostRow {
 
 // gorupKey generates a combined string to use as a single level key for maps
 // based on several fields
-func (cd *CostData) groupKey(keys []string, cr *CostRow) string {
+func GenerateGroupKey(keys []string, cr *CostRow) string {
 	key := ""
 	// sort the keys, reverse order
 	sort.Sort(sort.Reverse(sort.StringSlice(keys)))
 	for _, k := range keys {
-		key = key + strings.ToUpper(cr.Get(k))
+		t := strings.Trim(cr.Get(k), " ")
+		t = strings.ToUpper(t)
+		key = key + fmt.Sprintf("%v:%v||", k, t)
 	}
-	return key
+	return strings.Trim(key, "||")
 }
