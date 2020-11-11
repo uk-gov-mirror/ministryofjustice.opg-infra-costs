@@ -51,6 +51,7 @@ func Run(cmd commands.Command) error {
 		endDate,
 		period,
 		"")
+	// output to tabs!
 
 	spreadsheet.ToExcel(
 		ss,
@@ -103,8 +104,3 @@ func Run(cmd commands.Command) error {
 	return nil
 
 }
-
-// //
-// func totals(costData costs.CostData) {
-
-// }
