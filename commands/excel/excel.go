@@ -52,17 +52,53 @@ func Run(cmd commands.Command) error {
 		period,
 		"")
 
-	spreadsheet.TotalsByMonth(
+	spreadsheet.ToExcel(
 		ss,
-		&allAccounts,
+		"Totals",
 		&costData,
-		dateHeaders)
+		dateHeaders,
+		[]string{"Date"},
+		[]string{})
 
-	spreadsheet.TotalsByMonthAndProject(
+	spreadsheet.ToExcel(
 		ss,
-		&allAccounts,
+		"Environments",
 		&costData,
-		dateHeaders)
+		dateHeaders,
+		[]string{"Account.Environment", "Date"},
+		[]string{"Account.Environment"})
+
+	spreadsheet.ToExcel(
+		ss,
+		"Services",
+		&costData,
+		dateHeaders,
+		[]string{"Service", "Date"},
+		[]string{"Service"})
+
+	spreadsheet.ToExcel(
+		ss,
+		"Projects",
+		&costData,
+		dateHeaders,
+		[]string{"Account.Name", "Date"},
+		[]string{"Account.Name"})
+
+	spreadsheet.ToExcel(
+		ss,
+		"Projects And Environments",
+		&costData,
+		dateHeaders,
+		[]string{"Account.Name", "Account.Environment", "Date"},
+		[]string{"Account.Name", "Account.Environment"})
+
+	spreadsheet.ToExcel(
+		ss,
+		"Projects, Environments And Services",
+		&costData,
+		dateHeaders,
+		[]string{"Account.Name", "Account.Environment", "Service", "Date"},
+		[]string{"Account.Name", "Account.Environment", "Service"})
 
 	return nil
 
