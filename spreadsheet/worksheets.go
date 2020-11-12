@@ -6,7 +6,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/360EntSecGroup-Skylar/excelize"
+	"github.com/360EntSecGroup-Skylar/excelize/v2"
 )
 
 // ToExcel converts the cost data to mapped and grouped version

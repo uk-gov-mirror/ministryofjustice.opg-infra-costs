@@ -5,7 +5,7 @@ import (
 	"opg-infra-costs/costs"
 	"strconv"
 
-	"github.com/360EntSecGroup-Skylar/excelize"
+	"github.com/360EntSecGroup-Skylar/excelize/v2"
 )
 
 func writeDataToSheet(
@@ -61,7 +61,18 @@ func writeDataToSheet(
 		spreadsheet.SetCellValue(sheet, cell, m)
 		col++
 	}
+	// add sparkline col
+	spreadsheet.SetCellValue(
+		sheet,
+		fmt.Sprintf("%s%v", string(col), row),
+		"Trend")
+
 	maxcol = col
+	// sparkline data
+	sparks := map[string][]string{
+		"Location": []string{},
+		"Range":    []string{}}
+
 	// now write data to spreadsheet
 	for _, dataRow := range excel {
 		// set col and row
@@ -83,10 +94,33 @@ func writeDataToSheet(
 			col++
 		}
 
+		// add sparkline setup
+		sparks["Location"] = append(
+			sparks["Location"],
+			fmt.Sprintf("%v%v",
+				string(col),
+				row))
+
+		sparks["Range"] = append(
+			sparks["Range"],
+			fmt.Sprintf("%v!A%v:%v%v",
+				sheet,
+				row,
+				string(col-1),
+				row))
+
 	}
 
+	// add spark lines to the sheet
+	spreadsheet.AddSparkline(sheet, &excelize.SparklineOption{
+		Location: sparks["Location"],
+		Range:    sparks["Range"],
+		Markers:  true,
+		Type:     "column",
+		Style:    3})
+
 	// add the table and filtering options
-	max := fmt.Sprintf("%v%v", string(maxcol-1), row)
+	max := fmt.Sprintf("%v%v", string(maxcol), row)
 	spreadsheet.AddTable(
 		sheet,
 		"A1",
@@ -94,11 +128,11 @@ func writeDataToSheet(
 		`{
 			"table_style": "TableStyleMedium9"
 		}`)
-
+	// ignore the sparkline col
 	spreadsheet.AutoFilter(
 		sheet,
 		"A1",
-		max,
+		fmt.Sprintf("%v%v", string(maxcol-1), row),
 		"")
 
 	return nil

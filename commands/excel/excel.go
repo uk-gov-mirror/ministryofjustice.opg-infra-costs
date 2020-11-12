@@ -87,7 +87,7 @@ func Run(cmd commands.Command) error {
 
 	spreadsheet.ToExcel(
 		ss,
-		"Projects And Environments",
+		"ProjectsAndEnvironments",
 		&costData,
 		dateHeaders,
 		[]string{"Account.Name", "Account.Environment", "Date"},
@@ -95,7 +95,7 @@ func Run(cmd commands.Command) error {
 
 	spreadsheet.ToExcel(
 		ss,
-		"Projects, Environments And Services",
+		"ProjectsEnvironmentsAndServices",
 		&costData,
 		dateHeaders,
 		[]string{"Account.Name", "Account.Environment", "Service", "Date"},

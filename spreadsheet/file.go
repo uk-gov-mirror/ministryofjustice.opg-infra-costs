@@ -1,6 +1,6 @@
 package spreadsheet
 
-import "github.com/360EntSecGroup-Skylar/excelize"
+import "github.com/360EntSecGroup-Skylar/excelize/v2"
 
 func New() (*excelize.File, error) {
 	filename := "costs.xlsx"
