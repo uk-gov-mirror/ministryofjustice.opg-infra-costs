@@ -16,6 +16,16 @@ All commands require relevant `aws` credentials for `breakglass` or `billing` ro
 aws-vault exec identity -- $COMMAND
 ```
 
+### List
+
+- [Detail](#detail)
+- [Month to Date](#month-to-date)
+- [Year to Date](#year-to-date)
+- [Cost Increases](#cost-increases)
+- [Excel](#excel)
+- [Metrics](#metrics)
+
+
 ### Detail
 
 `detail` provides the most customisation and filtering abilities of all the commands allowing lookups against all of our AWS accounts.
@@ -123,7 +133,7 @@ opg-infra-costs detail \
 -end-date=2020-09-01T00:00:00Z
 ```
 
-### MTD - Month to Date
+### Month to Date
 
 Month to date provides a simple top line number by default for the current months costs:
 
@@ -155,7 +165,7 @@ opg-infra-costs mtd \
 -breakdown
 ```
 
-### YTD - Year to Date
+### Year to Date
 
 Year to date provides a simple top line number by default for the current years total costs:
 
@@ -222,6 +232,8 @@ Generate a year to date spreadsheet of costs grouped in various ways with sparkl
 ```bash
 opg-infra-costs excel
 ```
+
+This has arguments to filter by `-account` and `-env`, but not `-service`
 
 
 ### Metrics
