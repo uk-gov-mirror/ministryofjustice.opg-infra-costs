@@ -215,6 +215,15 @@ opg-infra-costs increases \
 This would exclude any line item cost below $100 in value from the comparision table
 
 
+### Excel
+
+Generate a year to date spreadsheet of costs grouped in various ways with sparkline trends to a file called `costs.xlsx`
+
+```bash
+opg-infra-costs excel
+```
+
+
 ### Metrics
 
 *WIP* - Command to send data to the mentrics api end point
