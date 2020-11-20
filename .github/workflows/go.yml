@@ -1,6 +1,8 @@
 name: Buid
 on:
   pull_request:
+    branches: [ main ]
+  push:
     branches: [ master ]
 
 jobs:
