@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// costResult struct is used for channel to handle result
 type costResult struct {
 	Costs []CostRow
 	Error error
@@ -29,6 +30,8 @@ func getCosts(
 	channel <- t
 }
 
+// gotCosts handles the resulting data from the channel as a goroutine
+// - uses a lock to ensure append is updated safely
 func gotCosts(
 	channel chan costResult,
 	waitgroup *sync.WaitGroup,
