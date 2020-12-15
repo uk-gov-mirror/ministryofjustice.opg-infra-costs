@@ -35,14 +35,26 @@ func DateStringToYearMonth(d string) (string, error) {
 }
 
 //Months returns a slice of headers between 2 dates passed
-// - excludes the last month (2020-01 - 2020-11 would give you 2020-01 to 2020-10)
+// - excludes the last month unless param is set to true
+// 	 	false: (2020-01 - 2020-11 would give you 2020-01 to 2020-10)
+// 	 	true: (2020-01 - 2020-11 would give you 2020-01 to 2020-11)
 func Months(
 	startDate time.Time,
 	endDate time.Time,
 	df string,
+	includeLastMonth bool,
 ) []time.Time {
+
 	months := []time.Time{}
-	for d := startDate; d.Format(df) < endDate.Format(df); d = d.AddDate(0, 1, 0) {
+	var end string
+
+	if includeLastMonth {
+		end = endDate.Format(df)
+	} else {
+		end = endDate.AddDate(0, -1, 0).Format(df)
+	}
+
+	for d := startDate; d.Format(df) <= end; d = d.AddDate(0, 1, 0) {
 		months = append(months, d)
 	}
 	return months
