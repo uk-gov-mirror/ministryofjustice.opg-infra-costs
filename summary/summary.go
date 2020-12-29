@@ -18,8 +18,10 @@ func Summary(
 	env string) {
 	// work out total
 	total := costData.Total()
+	days := (endDate.Sub(startDate).Hours() / 24)
+	average := (total / days)
 	p := message.NewPrinter(language.English)
-	message := p.Sprintf("Total cost: ($) %f", total)
+	message := p.Sprintf("Total cost: ($) %f\n  Daily average: ($) %f", total, average)
 
 	// filters that have been used
 	basedOn := fmt.Sprintf("  Between [%v] and [%v]",
