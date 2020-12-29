@@ -2,7 +2,6 @@ package excel
 
 import (
 	"flag"
-	"fmt"
 	"opg-infra-costs/accounts"
 	"opg-infra-costs/commands"
 	"opg-infra-costs/costs"
@@ -17,6 +16,9 @@ func Command() (commands.Command, error) {
 	cmd := commands.Command{Name: "excel"}
 	set := flag.NewFlagSet(cmd.Name, flag.ExitOnError)
 	commands.ArgumentStandardFilters(set, false)
+
+	set.Bool("include-current-month", false, "Include the current month in the outputed data")
+
 	cmd.Set = set
 	return cmd, nil
 }
@@ -27,18 +29,18 @@ func Run(cmd commands.Command) error {
 	cmd.Set.Parse(os.Args[2:])
 	account := cmd.Set.Lookup("account").Value.String()
 	env := cmd.Set.Lookup("env").Value.String()
+	includeCurrentMonth := cmd.Set.Lookup("include-current-month").Value.String() == "true"
+	period := "MONTHLY"
 
 	// dates
 	now := time.Now()
-	endStr := fmt.Sprintf("%d-%d-%s", now.Year(), now.Month(), "01")
-	endDate, _ := time.Parse(dates.AWSDateFormat(), endStr)
-	startStr := fmt.Sprintf("%d-%s-%s", endDate.Year(), "01", "01")
-	startDate, _ := time.Parse(dates.AWSDateFormat(), startStr)
-
-	period := "MONTHLY"
+	endDate := now
+	// changed to rolling 12 month
+	startDate := endDate.AddDate(0, -12, 0)
 
 	// create date headers for columns
-	dateHeaders := dates.Months(startDate, endDate, dates.AWSDateFormatYM())
+	dateHeaders := dates.Months(startDate, endDate, dates.AWSDateFormatYM(), includeCurrentMonth)
+
 	// create the spreadsheet
 	ss, _ := spreadsheet.New()
 
