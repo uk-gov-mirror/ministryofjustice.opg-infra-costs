@@ -62,8 +62,7 @@ func Run(cmd commands.Command) error {
 		return err
 	}
 	now := time.Now()
-	endStr := fmt.Sprintf("%d-%d-%s", now.Year(), now.Month(), "01")
-	endDate, _ := time.Parse(dates.AWSDateFormat(), endStr)
+	endDate := now
 	startStr := fmt.Sprintf("%d-%s-%s", endDate.Year(), "01", "01")
 	startDate, _ := time.Parse(dates.AWSDateFormat(), startStr)
 
