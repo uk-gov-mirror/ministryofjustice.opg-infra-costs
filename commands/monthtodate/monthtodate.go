@@ -10,6 +10,7 @@ import (
 	"opg-infra-costs/summary"
 	"opg-infra-costs/tabular"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -62,7 +63,13 @@ func Run(cmd commands.Command) error {
 		return err
 	}
 	endDate := time.Now()
-	startStr := fmt.Sprintf("%d-%d-%s", endDate.Year(), endDate.Month(), "01")
+	month := int(endDate.Month())
+	m := fmt.Sprintf("%s", strconv.Itoa(month))
+	if month < 10 {
+		m = "0" + m
+	}
+	startStr := fmt.Sprintf("%d-%s-%s", endDate.Year(), m, "01")
+	fmt.Println(startStr)
 	startDate, _ := time.Parse(dates.AWSDateFormat(), startStr)
 
 	allAccounts := accounts.Filtered(account, env)
