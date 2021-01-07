@@ -5,7 +5,7 @@ env_files:
 
 release:
   github:
-    owner: charlesmmarshall
+    owner: ministryofjustice
     name: opg-infra-costs
 
 builds:
