@@ -1,28 +1,42 @@
-name: Release on tag
+name: Create Release & Publish
+
 on:
+  pull_request:
+    branches:
+      - main
   push:
-      tags:
-        - "v*.*.*"
-      branches:
-        - "!*"
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: goreleaser
     steps:
-      - name: Checkout code into the go module directory
-        uses: actions/checkout@v2
-      - name: Set up Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.14
-        id: go
-
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v2
-        with:
-          version: latest
-          args: release --rm-dist
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.33.0
+      id: create_tag
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        INITIAL_VERSION: 0.0.0
+        DEFAULT_BUMP: minor
+        RELEASE_BRANCHES: main
+        WITH_V: true
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.create_tag.outputs.new_tag }}
+        release_name: ${{ steps.create_tag.outputs.new_tag }}
+        draft: false
+        prerelease: false
+    - name: goreleaser
+      uses: goreleaser/goreleaser-action@master
+      with:
+        args: release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
