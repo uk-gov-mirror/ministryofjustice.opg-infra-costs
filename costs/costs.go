@@ -46,6 +46,8 @@ func Unblended(
 					Account: account,
 				}
 				l := len(filterByService)
+				ServiceNameCorrection(&r)
+
 				// if there is no filter, or if the filter contained in the service name
 				if l == 0 || (l > 0 && strings.Contains(strings.ToUpper(r.Service), strings.ToUpper(filterByService))) {
 					resultsCosts = append(resultsCosts, r)
@@ -54,4 +56,15 @@ func Unblended(
 		}
 	}
 	return resultsCosts, nil
+}
+
+// ServiceNameCorrection is used to update service names to match when the change
+// in cost explorer
+func ServiceNameCorrection(row *CostRow) {
+
+	switch name := row.Service; name {
+	case "Amazon EC2 Container Service":
+		row.Service = "Amazon Elastic Container Service"
+	}
+
 }
