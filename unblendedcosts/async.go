@@ -4,54 +4,13 @@ import (
 	"opg-infra-costs/accounts"
 	"sync"
 	"time"
+
+	"github.com/gammazero/workerpool"
 )
 
-// costResult struct is used for channel to handle result
-type costResult struct {
-	Costs []CostRow
-	Error error
-}
+var WorkerpoolSize int = 30
 
-// getCosts does the outbound call to AWS - is used as a goroutine
-// - uses channels to pass data / errors back
-func getCosts(
-	channel chan costResult,
-	account accounts.Account,
-	start time.Time,
-	end time.Time,
-	period string,
-	service string) {
-
-	uc := New(account, start, end, period, service)
-	data, e := uc.CostData()
-	t := costResult{Costs: data.Entries}
-	if e != nil {
-		t.Error = e
-	}
-	channel <- t
-}
-
-// gotCosts handles the resulting data from the channel as a goroutine
-// - uses a lock to ensure append is updated safely
-func gotCosts(
-	channel chan costResult,
-	waitgroup *sync.WaitGroup,
-	mu *sync.Mutex,
-	costsRows *[]CostRow) {
-
-	c := <-channel
-	if c.Error == nil {
-		mu.Lock()
-		*costsRows = append(*costsRows, c.Costs...)
-		mu.Unlock()
-	}
-	waitgroup.Done()
-
-}
-
-// AyncCosts calls the AWS api
-// - converted to using chanel for data as seemed a race condition
-//	 with append where occassionally data would not be included
+// AyncCosts calls the AWS api using a workerpool
 func AsyncCosts(
 	allAccounts *[]accounts.Account,
 	startDate time.Time,
@@ -59,20 +18,26 @@ func AsyncCosts(
 	period string,
 	service string) (CostData, error) {
 
+	wp := workerpool.New(WorkerpoolSize)
+
 	var costData CostData
 	var rows []CostRow
-	var waitgroup sync.WaitGroup
 	mu := &sync.Mutex{}
 
-	channel := make(chan costResult)
-
 	for _, a := range *allAccounts {
-		waitgroup.Add(1)
-		go getCosts(channel, a, startDate, endDate, period, service)
-		go gotCosts(channel, &waitgroup, mu, &rows)
+		account := a
+		wp.Submit(func() {
+			uc := New(account, startDate, endDate, period, service)
+			data, e := uc.CostData()
+			if e == nil {
+				mu.Lock()
+				rows = append(rows, data.Entries...)
+				mu.Unlock()
+			}
+		})
+
 	}
-	// wait till complete
-	waitgroup.Wait()
+	wp.StopWait()
 	costData.Entries = rows
 
 	return costData, nil
