@@ -1,18 +1,9 @@
-package costs
+package unblendedcosts
 
 import (
 	"fmt"
-	"opg-infra-costs/accounts"
 	"strings"
 )
-
-type CostRow struct {
-	Date    string
-	Service string
-	Cost    float64
-	Account accounts.Account
-	Meta    map[string]string
-}
 
 func (c *CostRow) asMap() map[string]string {
 	return map[string]string{
@@ -32,17 +23,4 @@ func (c *CostRow) Get(prop string) string {
 		return meta[strings.ReplaceAll(prop, "Meta.", "")]
 	}
 	return c.asMap()[prop]
-}
-
-type CostData struct {
-	Entries []CostRow
-}
-
-// Total returns grand total of .Entries
-func (cd *CostData) Total() float64 {
-	total := 0.0
-	for _, r := range cd.Entries {
-		total = total + r.Cost
-	}
-	return total
 }

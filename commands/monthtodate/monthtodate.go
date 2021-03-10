@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"opg-infra-costs/accounts"
 	"opg-infra-costs/commands"
-	"opg-infra-costs/costs"
 	"opg-infra-costs/dates"
 	"opg-infra-costs/summary"
 	"opg-infra-costs/tabular"
+	costs "opg-infra-costs/unblendedcosts"
 	"os"
 	"time"
 )
@@ -65,18 +65,20 @@ func Run(cmd commands.Command) error {
 	month := int(endDate.Month())
 
 	startStr := fmt.Sprintf("%d-%02d-%s", endDate.Year(), month, "01")
-	fmt.Println(startStr)
 	startDate, _ := time.Parse(dates.AWSDateFormat(), startStr)
 
 	allAccounts := accounts.Filtered(account, env)
 	period := "MONTHLY"
-	costData, _ := costs.AsyncCosts(
+	costData, e := costs.AsyncCosts(
 		&allAccounts,
 		startDate,
 		endDate,
 		period,
 		service)
 
+	if len(e) > 0 {
+		return e[0]
+	}
 	// how do we output this - table is default
 	if breakdown {
 		headers := []string{"AccountName", "Environment", "Cost"}

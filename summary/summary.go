@@ -2,8 +2,8 @@ package summary
 
 import (
 	"fmt"
-	"opg-infra-costs/costs"
 	"opg-infra-costs/dates"
+	costs "opg-infra-costs/unblendedcosts"
 	"time"
 
 	"golang.org/x/text/language"
