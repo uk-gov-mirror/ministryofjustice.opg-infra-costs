@@ -16,12 +16,13 @@ func AsyncCosts(
 	startDate time.Time,
 	endDate time.Time,
 	period string,
-	service string) (CostData, error) {
+	service string) (CostData, []error) {
 
 	wp := workerpool.New(WorkerpoolSize)
 
 	var costData CostData
 	var rows []CostRow
+	var errors []error
 	mu := &sync.Mutex{}
 
 	for _, a := range *allAccounts {
@@ -29,7 +30,9 @@ func AsyncCosts(
 		wp.Submit(func() {
 			uc := New(account, startDate, endDate, period, service)
 			data, e := uc.CostData()
-			if e == nil {
+			if e != nil {
+				errors = append(errors, e)
+			} else {
 				mu.Lock()
 				rows = append(rows, data.Entries...)
 				mu.Unlock()
@@ -40,5 +43,5 @@ func AsyncCosts(
 	wp.StopWait()
 	costData.Entries = rows
 
-	return costData, nil
+	return costData, errors
 }
