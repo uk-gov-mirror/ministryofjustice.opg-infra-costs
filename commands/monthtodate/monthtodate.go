@@ -65,7 +65,6 @@ func Run(cmd commands.Command) error {
 	month := int(endDate.Month())
 
 	startStr := fmt.Sprintf("%d-%02d-%s", endDate.Year(), month, "01")
-	fmt.Println(startStr)
 	startDate, _ := time.Parse(dates.AWSDateFormat(), startStr)
 
 	allAccounts := accounts.Filtered(account, env)
