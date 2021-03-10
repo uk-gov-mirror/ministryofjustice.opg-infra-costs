@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"opg-infra-costs/costs"
+	costs "opg-infra-costs/unblendedcosts"
 )
 
 const ApiEndpoint = "https://lz0rqicsng.execute-api.eu-west-1.amazonaws.com/prod/streams/TimestreamMetricsStream/records"
