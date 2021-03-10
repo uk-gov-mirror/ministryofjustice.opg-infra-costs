@@ -1,7 +1,7 @@
 package tabular
 
 import (
-	"opg-infra-costs/costs"
+	costs "opg-infra-costs/unblendedcosts"
 
 	"github.com/fatih/color"
 	"github.com/rodaine/table"
