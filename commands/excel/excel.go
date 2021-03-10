@@ -36,7 +36,8 @@ func Run(cmd commands.Command) error {
 	now := time.Now()
 	endDate := now
 	// changed to rolling 12 month
-	startDate := endDate.AddDate(0, -12, 0)
+	lastYear := endDate.AddDate(0, -12, 0)
+	startDate := time.Date(lastYear.Year(), lastYear.Month(), 1, 0, 0, 0, 0, now.Location())
 
 	// create date headers for columns
 	dateHeaders := dates.Months(startDate, endDate, dates.AWSDateFormatYM(), includeCurrentMonth)
