@@ -29,13 +29,16 @@ func Run(cmd commands.Command) error {
 	period := "DAILY"
 
 	allAccounts := accounts.List()
-	costData, _ := costs.AsyncCosts(
+	costData, e := costs.AsyncCosts(
 		&allAccounts,
 		startDate,
 		endDate,
 		period,
 		"")
 
+	if len(e) > 0 {
+		return e[0]
+	}
 	metrics.SendToApi(costData)
 
 	return nil

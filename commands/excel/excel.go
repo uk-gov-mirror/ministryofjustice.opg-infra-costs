@@ -47,12 +47,17 @@ func Run(cmd commands.Command) error {
 	allAccounts := accounts.Filtered(account, env)
 
 	// get cost data
-	costData, _ := costs.AsyncCosts(
+	costData, e := costs.AsyncCosts(
 		&allAccounts,
 		startDate,
 		endDate,
 		period,
 		"")
+
+	if len(e) > 0 {
+		return e[0]
+	}
+
 	// output to tabs!
 
 	spreadsheet.ToExcel(

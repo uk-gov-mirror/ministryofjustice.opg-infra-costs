@@ -68,13 +68,16 @@ func Run(cmd commands.Command) error {
 
 	allAccounts := accounts.Filtered(account, env)
 	period := "MONTHLY"
-	costData, _ := costs.AsyncCosts(
+	costData, e := costs.AsyncCosts(
 		&allAccounts,
 		startDate,
 		endDate,
 		period,
 		service)
 
+	if len(e) > 0 {
+		return e[0]
+	}
 	if breakdown {
 		headers := []string{"Date", "Cost"}
 		row := []string{"Date", "Cost"}

@@ -69,13 +69,16 @@ func Run(cmd commands.Command) error {
 
 	allAccounts := accounts.Filtered(account, env)
 	period := "MONTHLY"
-	costData, _ := costs.AsyncCosts(
+	costData, e := costs.AsyncCosts(
 		&allAccounts,
 		startDate,
 		endDate,
 		period,
 		service)
 
+	if len(e) > 0 {
+		return e[0]
+	}
 	// how do we output this - table is default
 	if breakdown {
 		headers := []string{"AccountName", "Environment", "Cost"}

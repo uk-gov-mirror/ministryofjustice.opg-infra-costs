@@ -76,20 +76,24 @@ func Run(cmd commands.Command) error {
 	// get all accounts
 	allAccounts := accounts.Filtered(account, env)
 	// get costs for both periods for all accounts
-	costDataA, _ := costs.AsyncCosts(
+	costDataA, e := costs.AsyncCosts(
 		&allAccounts,
 		a,
 		a.AddDate(0, 1, 0),
 		period,
 		"")
-
-	costDataB, _ := costs.AsyncCosts(
+	if len(e) > 0 {
+		return e[0]
+	}
+	costDataB, e := costs.AsyncCosts(
 		&allAccounts,
 		b,
 		b.AddDate(0, 1, 0),
 		period,
 		"")
-
+	if len(e) > 0 {
+		return e[0]
+	}
 	mapA := costDataA.GroupByKeysMap(groupBy)
 	mapB := costDataB.GroupByKeysMap(groupBy)
 
