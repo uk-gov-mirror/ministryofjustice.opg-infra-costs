@@ -1,10 +1,13 @@
-package costs
+package unblendedcosts
 
-import (
-	"fmt"
-	"sort"
-	"strings"
-)
+// Total returns grand total of .Entries
+func (cd *CostData) Total() float64 {
+	total := 0.0
+	for _, r := range cd.Entries {
+		total = total + r.Cost
+	}
+	return total
+}
 
 // GroupByKeys returns a new CostData re-organised to be grouped by the key array passed
 func (cd *CostData) GroupByKeys(keys []string) CostData {
@@ -35,18 +38,4 @@ func (cd *CostData) GroupByKeysMap(keys []string) map[string]CostRow {
 		mapped[key] = found
 	}
 	return mapped
-}
-
-// gorupKey generates a combined string to use as a single level key for maps
-// based on several fields
-func GenerateGroupKey(keys []string, cr *CostRow) string {
-	key := ""
-	// sort the keys, reverse order
-	sort.Sort(sort.Reverse(sort.StringSlice(keys)))
-	for _, k := range keys {
-		t := strings.Trim(cr.Get(k), " ")
-		t = strings.ToUpper(t)
-		key = key + fmt.Sprintf("%v:%v||", k, t)
-	}
-	return strings.Trim(key, "||")
 }

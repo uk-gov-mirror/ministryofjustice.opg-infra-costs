@@ -2,7 +2,7 @@ package spreadsheet
 
 import (
 	"fmt"
-	"opg-infra-costs/costs"
+	costs "opg-infra-costs/unblendedcosts"
 	"strconv"
 
 	"github.com/360EntSecGroup-Skylar/excelize/v2"
